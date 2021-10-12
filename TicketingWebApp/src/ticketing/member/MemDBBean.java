@@ -3,6 +3,7 @@ package ticketing.member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -79,5 +80,60 @@ public class MemDBBean {
 			e.printStackTrace();
 		}
 		return re;
+	}
+	
+	public int memberCheck(String id, String pwd) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT mem_pwd FROM mem WHERE mem_id = ?";
+		int re = -1;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) { // 아이디가 일치하는 행 존재
+				if (rs.getString("mem_pwd").equals(pwd)) { // 비밀번호도 일치
+					re = 1;
+				} else { // 아이디는 맞지만 비밀번호 불일치
+					re = 0;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) rs.close();
+			if (pstmt != null) pstmt.close();
+			if (conn != null) conn.close();
+		}
+		return re;
+	}
+	
+	public MemBean getMember(String id) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM mem WHERE mem_id = ?";
+		MemBean member = null;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) { // 아이디가 일치하는 행 존재
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) rs.close();
+			if (pstmt != null) pstmt.close();
+			if (conn != null) conn.close();
+		}
+		return member;
 	}
 }
