@@ -20,7 +20,7 @@
     ``` xml
     <Context docBase="TicketingWebApp" path="/TicketingWebApp" reloadable="true" source="org.eclipse.jst.jee.server:TicketingWebApp"></Context>
     ```
-2. <Context></Context> 내에 아래 소스를 추가
+2. `<Context></Context>` 내에 아래 소스를 추가
     ``` xml
     <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="100" maxIdle="30" maxWait="10000" name="jdbc/oracle" password="1234" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:xe" username="TICKETING"/>
     ```
