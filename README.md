@@ -1,5 +1,4 @@
 # 티켓팅
----
 
 ## 💻 실행 환경
 - windows 10
@@ -7,7 +6,6 @@
 - Apache Tomcat 7.0
 
 ## 💻 실행하기
----
 ### Oracle에 사용자 추가
 1. System 계정으로 접속하여 'TICKETING'이라는 이름의 사용자를 추가한다.
 
@@ -28,35 +26,34 @@
     ```
 
 ## 📂 폴더 구조
----
 ```bash
-.
-+-- src
-|   +-- myUtil
-|   |   +-- HanConv.java
-|   +-- tickeing.member
-|   |   +-- MemberBean.java
-|   |   +-- MemberDBBean.java
-|   +-- tickeing.manager
-|   |   +-- ManagerBean.java
-|   |   +-- ManagerDBBean.java
-+-- WebContent
-|   +-- member
-|   |   +-- memberLoginForm.jsp
-|   |   +-- memberLoginOk.jsp
-|   |   +-- memberLogout.jsp
-|   |   +-- memberRegisterForm.jsp
-|   |   +-- memberRegisterOk.jsp
-|   |   +-- memberUpdateForm.jsp
-|   |   +-- memberUpdateOk.jsp
-|   |   +-- memberDeleteForm.jsp
-|   |   +-- memberDeleteOk.jsp
-|   +-- manager
-|   |   +-- managerLoginForm.jsp
-|   |   +-- managerLoginOk.jsp
-|   |   +-- managerLogout.jsp
-|   |   +-- managerRegisterForm.jsp
-|   |   +-- managerRegisterOk.jsp
-|   +-- index.jsp
-|   +-- managerMain.jsp
+src
+ ┣ myUtil
+ ┃ ┗ HanConv.java
+ ┗ ticketing
+ ┃ ┣ manager
+ ┃ ┃ ┣ ManagerBean.java
+ ┃ ┃ ┗ ManagerDBBean.java
+ ┃ ┗ member
+ ┃ ┃ ┣ MemberBean.java
+ ┃ ┃ ┗ MemberDBBean.java
+WebContent
+ ┣ manager
+ ┃ ┣ managerLoginForm.jsp
+ ┃ ┣ managerLoginOk.jsp
+ ┃ ┣ managerLogout.jsp
+ ┃ ┣ managerRegisterForm.jsp
+ ┃ ┗ managerRegisterOk.jsp
+ ┣ member
+ ┃ ┣ memberDeleteForm.jsp
+ ┃ ┣ memberDeleteOk.jsp
+ ┃ ┣ memberLoginForm.jsp
+ ┃ ┣ memberLoginOk.jsp
+ ┃ ┣ memberLogout.jsp
+ ┃ ┣ memberRegisterForm.jsp
+ ┃ ┣ memberRegisterOk.jsp
+ ┃ ┣ memberUpdateForm.jsp
+ ┃ ┗ memberUpdateOk.jsp
+ ┣ index.jsp
+ ┗ managerMain.jsp
 ```
