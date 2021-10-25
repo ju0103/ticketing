@@ -3,8 +3,10 @@
 --   사이트:      Oracle Database 11g
 --   유형:      Oracle Database 11g
 
+select * from ticketing.member;
 
 
+commit;
 CREATE USER ticketing 
     IDENTIFIED BY
     DEFAULT TABLESPACE users
@@ -17,6 +19,8 @@ GRANT UNLIMITED TABLESPACE TO TICKETING
 -- predefined type, no DDL - MDSYS.SDO_GEOMETRY
 
 -- predefined type, no DDL - XMLTYPE
+
+select * from TICKETING.performance;
 
 CREATE TABLE ticketing.manager (
     manager_id      VARCHAR2(20 BYTE) NOT NULL,
