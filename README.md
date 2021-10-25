@@ -24,6 +24,13 @@
     ``` xml
     <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="100" maxIdle="30" maxWait="10000" name="jdbc/oracle" password="1234" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:xe" username="TICKETING"/>
     ```
+    
+### 10/25 performance 업데이트 관련
+performance 테이블 insert (perfor_RegisterForm.jsp) 공연포스터 업로드 시 본인 workspace 하위 경로에 upload 파일 생성
+
+Ex) D:\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\TicketingWebApp\upload
+
+
 
 ## 📂 폴더 구조
 ```
