@@ -13,7 +13,7 @@
 %>
 		<script>
 			alert("성공적으로 탈퇴되었습니다.");
-			document.location.href="../index.jsp";
+			document.location.href="../memberMain/index.jsp";
 		</script>
 <%
 	} else {

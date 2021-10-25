@@ -17,7 +17,7 @@
 %>
 		<script>
 			alert("회원 정보가 수정되었습니다.");
-			document.location.href="../index.jsp";
+			document.location.href="../memberMain/index.jsp";
 		</script>
 <%
 	} else {

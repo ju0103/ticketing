@@ -43,6 +43,13 @@
 			<tr>
 				<td><a href="#">공연 수정/삭제</a></td>
 			</tr>
+			<%--10/22 관리자 페이지 회원 관리 작업 Update--%>
+			<tr>
+				<td><h3>회원 관리 작업</h3></td>
+			</tr>
+			<tr>
+				<td><a href="./manager/membershipForm.jsp">회원 관리</a></td>
+			</tr>
 		</table>
 <%
 	}
