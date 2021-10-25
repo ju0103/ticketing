@@ -26,7 +26,7 @@
     ```
 
 ## 📂 폴더 구조
-```bash
+```
 src
  ┣ myUtil
  ┃ ┗ HanConv.java
@@ -38,12 +38,18 @@ src
  ┃ ┃ ┣ MemberBean.java
  ┃ ┃ ┗ MemberDBBean.java
 WebContent
+ ┣ css
+ ┃ ┗ styles.css
+ ┣ js
+ ┃ ┗ scripts.js
  ┣ manager
  ┃ ┣ managerLoginForm.jsp
  ┃ ┣ managerLoginOk.jsp
  ┃ ┣ managerLogout.jsp
  ┃ ┣ managerRegisterForm.jsp
  ┃ ┗ managerRegisterOk.jsp
+ ┣ managerMain
+ ┃ ┗ managerMain.jsp
  ┣ member
  ┃ ┣ memberDeleteForm.jsp
  ┃ ┣ memberDeleteOk.jsp
@@ -54,6 +60,8 @@ WebContent
  ┃ ┣ memberRegisterOk.jsp
  ┃ ┣ memberUpdateForm.jsp
  ┃ ┗ memberUpdateOk.jsp
- ┣ index.jsp
- ┗ managerMain.jsp
+ ┣ memberMain
+ ┃ ┣ footer.jsp
+ ┃ ┣ header.jsp
+ ┗ ┗ index.jsp
 ```
