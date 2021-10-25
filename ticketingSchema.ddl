@@ -3,24 +3,29 @@
 --   사이트:      Oracle Database 11g
 --   유형:      Oracle Database 11g
 
-select * from ticketing.member;
 
 
-commit;
-CREATE USER ticketing 
-    IDENTIFIED BY
-    DEFAULT TABLESPACE users
+
+
+CREATE USER ticketing
+    IDENTIFIED BY 1234
+    DEFAULT TABLESPACE users 
     QUOTA 10485760 ON users
     ACCOUNT UNLOCK;
+    
 
-GRANT UNLIMITED TABLESPACE TO TICKETING 
-;
+GRANT UNLIMITED TABLESPACE TO TICKETING;
+
+GRANT CONNECT,RESOURCE,DBA TO TICKETING;
+GRANT CREATE TABLE, CREATE VIEW TO TICKETING;
+GRANT CONNECT,DBA TO TICKETING;
+
 
 -- predefined type, no DDL - MDSYS.SDO_GEOMETRY
 
 -- predefined type, no DDL - XMLTYPE
 
-select * from TICKETING.performance;
+
 
 CREATE TABLE ticketing.manager (
     manager_id      VARCHAR2(20 BYTE) NOT NULL,
@@ -52,26 +57,35 @@ ALTER TABLE ticketing.member
         USING INDEX PCTFREE 10 INITRANS 2 TABLESPACE users LOGGING
             STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
             DEFAULT );
-
+            
+            
+drop table ticketing.performance;
 CREATE TABLE ticketing.performance (
-    p_id        NUMBER(5) NOT NULL,
+    p_code      NUMBER(7) NOT NULL, --문자열 시 변환 이슈로 정수형으로 수정
     p_type      VARCHAR2(10 BYTE),
     p_title     VARCHAR2(30 BYTE),
     p_area      VARCHAR2(10 BYTE),
-    p_date      DATE,
+    p_date      date,
     p_performer VARCHAR2(50 BYTE),
     p_price     NUMBER(7),
-    p_count     NUMBER(6),
-    p_poster    VARCHAR2(20 BYTE),
-    p_content   VARCHAR2(2000 BYTE),
-    p_hit       NUMBER(5),
-    p_regdate   DATE
+    p_seat     NUMBER(6),
+    --p_poster    VARCHAR2(20 BYTE),
+    P_DESCRIPTION   VARCHAR2(2000 BYTE),
+    p_regdate   DATE,
+    p_rating    NUMBER(2),--10/24 관람연령등급컬럼 생성
+    p_FNAME VARCHAR2(100 BYTE), --10/24 파일명 컬럼 생성
+	p_FSIZE NUMBER(10,0), -- 10/24 파일사이즈 컬럼 생성
+    p_RFNAME VARCHAR2(100), -- 10/24 파일 실제 이름 컬럼 생성
+    p_ref number(5), --10/25 페이징컬럼 추가 예정 컬럼 생성
+    p_step number(5),
+    p_level number(5)
+    
 )
 PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
     STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
 
 ALTER TABLE ticketing.performance
-    ADD CONSTRAINT performance_pk PRIMARY KEY ( p_id )
+    ADD CONSTRAINT performance_pk PRIMARY KEY ( p_code )
         USING INDEX PCTFREE 10 INITRANS 2 TABLESPACE users LOGGING
             STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
             DEFAULT );

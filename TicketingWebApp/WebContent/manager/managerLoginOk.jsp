@@ -23,7 +23,7 @@
 			session.setAttribute("manager_id", id);
 			session.setAttribute("manager_name", manager.getManager_name());
 			session.setAttribute("manager", "yes");
-			response.sendRedirect("../managerMain.jsp");
+			response.sendRedirect("../managerMain/managerMain.jsp");
 		} else if (result == 0) {
 %>
 			<script>

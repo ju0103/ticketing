@@ -2,5 +2,5 @@
     pageEncoding="EUC-KR"%>
 <%
 	session.invalidate();
-	response.sendRedirect("../managerMain.jsp");
+	response.sendRedirect("../managerMain/managerMain.jsp");
 %>

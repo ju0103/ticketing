@@ -156,4 +156,41 @@ public class ManagerDBBean {
 			}
 			return manager;
 		}
+		
+			//2021-10-22  관리자페이지 회원삭제 메소드
+				public int deleteMember(String id) throws Exception {
+					Connection conn = null;
+					PreparedStatement pstmt = null;
+					ResultSet rs = null;
+					String sql = "";
+					int re = -1;
+					
+					try {
+						conn = getConnection();
+						sql = "SELECT member_pwd FROM MEMBER WHERE member_id = ?";
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setString(1, id);
+						rs = pstmt.executeQuery();
+						
+						if (rs.next()) { // 해당 아이디를 가진 회원 존재
+								sql = "DELETE FROM MEMBER WHERE member_id = ?";
+								pstmt = conn.prepareStatement(sql);
+								pstmt.setString(1, id);
+								re = pstmt.executeUpdate();
+							} else { // 해당 아이디 없음
+								re = 0;
+							}
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						try {
+							if (pstmt != null) pstmt.close();
+							if (conn != null) conn.close();
+						} catch (Exception e2) {
+							e2.printStackTrace();
+						}
+					}
+					return re;
+				}
+		
 }

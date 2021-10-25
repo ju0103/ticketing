@@ -7,7 +7,7 @@
 	<title>로그인</title>
 </head>
 <body>
-	<form method="post" action="managerLoginOk.jsp">
+	<form method="post" action="./managerLoginOk.jsp">
 		<table>
 			<tr>
 				<td>아이디</td>
