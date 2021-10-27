@@ -1,3 +1,5 @@
+<%@page import="java.net.URLEncoder"%>
+<%@page import="myUtil.HanConv"%>
 <%@page import="ticketing.manager.ManagerDBBean"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="ticketing.performance.PerformanceDBBean"%>
@@ -13,9 +15,7 @@
 
 <%
 ManagerDBBean mnagerdb = ManagerDBBean.getInstance();
-
 String path = request.getRealPath("upload");
-System.out.print(path);
 int size=1024*1024;
 int fileSize=0;
 String file="";
@@ -47,7 +47,6 @@ if(file != null){
 	oriFile = multi.getOriginalFileName(str);
 	fileSize = file.getBytes().length;
 }
-
 	board.setP_type(multi.getParameter("p_type"));
 	board.setP_title(multi.getParameter("p_title"));
 	board.setP_area(multi.getParameter("p_area"));

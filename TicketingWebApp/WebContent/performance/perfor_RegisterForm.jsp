@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
     <%-- js check_ok 예정 / 공연 날짜에 시각 추가 예정   --%>
 
@@ -9,7 +9,9 @@
 </head>
 <body>
 	<h1>공연 등록</h1>
-		<form method="post" action="perfor_RegisterOk.jsp" enctype="multipart/form-data">
+	
+		<%-- 10/27 한글처리 => accept-charset="EUC-KR" 추가  / 파일명 한글일 때 출력 시 깨짐 현상있음--%>	
+		<form method="post" action="perfor_RegisterOk.jsp" enctype="multipart/form-data" accept-charset="EUC-KR">
 		<table>
 			<tr height="30">
 				<td width="50">

@@ -20,9 +20,9 @@
 	%>
 		<script type="text/javascript">
 		alert("삭제 성공");
-		response.sendRedirect("perfor_List.jsp"); //경로 에러;
 		</script>
 	<%
+	response.sendRedirect("perfor_List.jsp");
 	}else if(re == 0){
 		%>
 		<script type="text/javascript">

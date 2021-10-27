@@ -42,6 +42,7 @@
 					p_performer = board.getP_performer();
 					p_rfname = board.getP_rfname();
 					p_regdate = board.getP_regdate();
+					p_fname = board.getP_fname();
 			%>
 					<tr height="25" bgcolor="#f7f7f7" 
 									onmouseover="this.style.backgroundColor='#eeeeef'" 
@@ -50,7 +51,7 @@
 						<%
 							if(p_rfname != null){
 								%>
-							<img src="../upload/<%=p_rfname %>" width="50" height="50">
+							<img src="../upload/<%=p_fname %>" width="50" height="50">
 								<%
 							} else{
 								%>
@@ -77,10 +78,11 @@
 							</td>
 						</tr>
 							<%
-
 				}
 			%>
+			
 		</table>
+		
 		<input type="button" value="µî·Ï" onclick="location.href='perfor_RegisterForm.jsp'">
 	</center>
 </body>
