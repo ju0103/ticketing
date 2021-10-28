@@ -55,6 +55,20 @@
 			<tr>
 				<td><a href="../manager/membershipForm.jsp">회원 관리</a></td>
 			</tr>
+			
+			<%--10/22 관리자 페이지 회원 관리 작업 Update--%>
+			<tr>
+				<td><h3>고객 센터 관리 작업</h3></td>
+			</tr>
+			<tr>
+				<td><a href="../faq/faqList.jsp">FAQ 목록</a></td>
+			</tr>
+			<tr>
+				<td><a href="../faq/faqRegisterForm.jsp">FAQ 등록</a></td>
+			</tr>
+			<tr>
+				<td><a href="../faq/faqList.jsp">FAQ 수정 및 삭제</a></td>
+			</tr>
 		</table>
 <%
 	}
