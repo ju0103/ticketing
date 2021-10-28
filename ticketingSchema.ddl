@@ -5,7 +5,7 @@
 
 
 
-
+select*from performance;
 
 CREATE USER ticketing
     IDENTIFIED BY 1234
