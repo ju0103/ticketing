@@ -19,71 +19,111 @@
 
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+	<meta charset="EUC-KR">
+	<meta name="viewport" content="width=deivce-width, initial-scale=1">
+	<title>Insert title here</title>
+	<!-- CSS -->
+    <link href="../css/styles.css" rel="stylesheet" />
 </head>
 <body>
-<center>
-	<table width="800" border="1" cellspacing="0" >
-			<tr height="25">
-				<td width="100"  align="center">포스터</td>
-				<td width="40" align="center">등록번호</td>
-				<td width="450" align="center">콘서트 제목</td>
-				<td width="120" align="center">출연진</td>
-				<td width="130" align="center">파일이름</td>
-				<td width="130" align="center">공연등록일</td>
-			</tr>	
-			
-		<%
-				for(int i=0; i<perforList.size(); i++){
-					PerformanceBean board = perforList.get(i);
-					p_code = board.getP_code();
-				 	p_title = board.getP_title();
-					p_performer = board.getP_performer();
-					p_rfname = board.getP_rfname();
-					p_regdate = board.getP_regdate();
-					p_fname = board.getP_fname();
-			%>
-					<tr height="25" bgcolor="#f7f7f7" 
-									onmouseover="this.style.backgroundColor='#eeeeef'" 
-									onmouseout="this.style.backgroundColor='#f7f7f7'">
-						<td align="center">
+	<%
+		if ((String)session.getAttribute("manager") == "yes") {
+	%>
+			<center>
+			<table width="800" border="1" cellspacing="0" >
+					<tr height="25">
+						<td width="100"  align="center">포스터</td>
+						<td width="40" align="center">등록번호</td>
+						<td width="450" align="center">콘서트 제목</td>
+						<td width="120" align="center">출연진</td>
+						<td width="130" align="center">파일이름</td>
+						<td width="130" align="center">공연등록일</td>
+					</tr>	
+					
+				<%
+						for(int i=0; i<perforList.size(); i++){
+							PerformanceBean board = perforList.get(i);
+							p_code = board.getP_code();
+						 	p_title = board.getP_title();
+							p_performer = board.getP_performer();
+							p_rfname = board.getP_rfname();
+							p_regdate = board.getP_regdate();
+							p_fname = board.getP_fname();
+					%>
+							<tr height="25" bgcolor="#f7f7f7" 
+											onmouseover="this.style.backgroundColor='#eeeeef'" 
+											onmouseout="this.style.backgroundColor='#f7f7f7'">
+								<td align="center">
+								<%
+									if(p_rfname != null){
+										%>
+									<img src="../upload/<%=p_fname %>" width="50" height="50">
+										<%
+									} else{
+										%>
+										<a href >포스터 등록</a>
+										<%
+									}
+								%>
+								</td>
+									<td align="center">
+										<%= p_code %>
+									</td>
+									<td>
+										<a href="perfor_View.jsp?p_code=<%= p_code %>"><%= p_title %></a>
+										
+									</td>
+									<td>
+										<%= p_performer %>
+									</td>
+									<td>
+										<%= p_rfname %>
+									</td>
+									<td>
+										<%= sdf.format(p_regdate) %>
+									</td>
+								</tr>
+									<%
+						}
+					%>
+					
+				</table>
+				<input type="button" value="등록" onclick="location.href='perfor_RegisterForm.jsp'">
+			</center>
+	<%
+		} else {
+	%>
+			<section class="py-5">
+				<div class="container px-4 px-lg-5 mt-5">
+					<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 						<%
-							if(p_rfname != null){
-								%>
-							<img src="../upload/<%=p_fname %>" width="50" height="50">
-								<%
-							} else{
-								%>
-								<a href >포스터 등록</a>
-								<%
+							for (int i = 0; i< perforList.size(); i++) {
+								PerformanceBean board = perforList.get(i);
+								p_code = board.getP_code();
+							 	p_title = board.getP_title();
+								p_performer = board.getP_performer();
+								p_rfname = board.getP_rfname();
+								p_fname = board.getP_fname();
+						%>
+								<div class="mb-5">
+									<div class="card h-100">
+										<a href="#">
+											<img class="card-img-top" src="../upload/<%=p_fname %>" width="50" height="150">
+											<div class="card-body text-center">
+												<h6 class="card-title"><%= p_title %></h2>
+											</div>
+										</a>
+									</div>
+								</div>
+						<%
 							}
 						%>
-						</td>
-							<td align="center">
-								<%= p_code %>
-							</td>
-							<td>
-								<a href="perfor_View.jsp?p_code=<%= p_code %>"><%= p_title %></a>
-								
-							</td>
-							<td>
-								<%= p_performer %>
-							</td>
-							<td>
-								<%= p_rfname %>
-							</td>
-							<td>
-								<%= sdf.format(p_regdate) %>
-							</td>
-						</tr>
-							<%
-				}
-			%>
-			
-		</table>
-		
-		<input type="button" value="등록" onclick="location.href='perfor_RegisterForm.jsp'">
-	</center>
+					</div>
+				</div>
+			</section>
+	<%
+		}
+	%>
+
 </body>
 </html>
