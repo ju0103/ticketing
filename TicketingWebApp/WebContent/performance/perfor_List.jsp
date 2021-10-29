@@ -6,14 +6,14 @@
 <%@page import="ticketing.performance.PerformanceDBBean"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-    <%-- 한글 구현 진행 중 / 메인 페이지 버튼 추가 예정 / 페이징  --%>
+    <%-- 한글 구현완(업로드파일x)/ 메인 페이지 버튼 추가 예정 / 페이징  --%>
     <%
     PerformanceDBBean pdb = PerformanceDBBean.getInstance();
     ArrayList<PerformanceBean> perforList = pdb.listBoard();
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
    
-    String  p_type, p_title,p_area,p_date,p_performer,p_fname,p_rfname;
-    int p_code, p_price,p_seat,p_fsize,p_ref,p_step,p_level,p_rating;
+    String  p_type, p_title,p_area,p_date,p_performer,p_fname,p_rfname,p_detailarea;
+    int p_code, p_price,p_seat,p_fsize,p_ref,p_step,p_level,p_rating,p_time;
     Timestamp p_regdate;
     %>
 
@@ -26,18 +26,21 @@
     <link href="../css/styles.css" rel="stylesheet" />
 </head>
 <body>
+<jsp:include page="../managerMain/managerHeader.jsp" />	
 	<%
 		if ((String)session.getAttribute("manager") == "yes") {
 	%>
 			<center>
-			<table width="800" border="1" cellspacing="0" >
+			<table  class="table table-striped table-bordered table-hover" >
 					<tr height="25">
 						<td width="100"  align="center">포스터</td>
 						<td width="40" align="center">등록번호</td>
-						<td width="450" align="center">콘서트 제목</td>
+						<td width="300" align="center">콘서트 제목</td>
 						<td width="120" align="center">출연진</td>
 						<td width="130" align="center">파일이름</td>
 						<td width="130" align="center">공연등록일</td>
+						<td width="130" align="center">공연장소</td>
+						<td width="130" align="center">공연일시</td>
 					</tr>	
 					
 				<%
@@ -49,10 +52,10 @@
 							p_rfname = board.getP_rfname();
 							p_regdate = board.getP_regdate();
 							p_fname = board.getP_fname();
+							p_area = board.getP_area();
+							p_date = board.getP_date();
 					%>
-							<tr height="25" bgcolor="#f7f7f7" 
-											onmouseover="this.style.backgroundColor='#eeeeef'" 
-											onmouseout="this.style.backgroundColor='#f7f7f7'">
+							<tr height="25">
 								<td align="center">
 								<%
 									if(p_rfname != null){
@@ -61,7 +64,7 @@
 										<%
 									} else{
 										%>
-										<a href >포스터 등록</a>
+										<a href="perfor_UpdateForm.jsp?p_code=<%=p_code%>">포스터 등록</a>
 										<%
 									}
 								%>
@@ -73,14 +76,20 @@
 										<a href="perfor_View.jsp?p_code=<%= p_code %>"><%= p_title %></a>
 										
 									</td>
-									<td>
+									<td align="center">
 										<%= p_performer %>
 									</td>
-									<td>
+									<td align="center">
 										<%= p_rfname %>
 									</td>
-									<td>
+									<td align="center">
 										<%= sdf.format(p_regdate) %>
+									</td>
+									<td>
+										<%= p_area %>
+									</td>
+									<td align="center">
+										<%= p_date %>
 									</td>
 								</tr>
 									<%
@@ -88,7 +97,7 @@
 					%>
 					
 				</table>
-				<input type="button" value="등록" onclick="location.href='perfor_RegisterForm.jsp'">
+				<input class="btn btn-primary" type="button" value="등록" onclick="location.href='perfor_RegisterForm.jsp'">
 			</center>
 	<%
 		} else {
@@ -124,6 +133,10 @@
 	<%
 		}
 	%>
-
+	<jsp:include page="../memberMain/footer.jsp"></jsp:include>
+	<!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="../js/scripts.js"></script>
 </body>
 </html>

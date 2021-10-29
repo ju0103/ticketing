@@ -63,18 +63,19 @@ private static FaqDBBean instance = new FaqDBBean();
 	}
 	
 	// listFaq(): faq 리스트를 리턴하는 메소드
-	public ArrayList<FaqBean> listFaq() throws Exception {
+	public ArrayList<FaqBean> listFaq(String faq_type) throws Exception {
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
 		ArrayList<FaqBean> faqList = new ArrayList<FaqBean>();
 		
 		try {
 			conn = getConnection();
-			sql = "select * from faq ORDER BY faq_code";
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
+			sql = "select * from faq WHERE faq_type = ? ORDER BY faq_code";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setNString(1, faq_type);
+			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
 				FaqBean faq = new FaqBean();
@@ -89,7 +90,7 @@ private static FaqDBBean instance = new FaqDBBean();
 		} finally {
 			try {
 				if (rs != null) rs.close();
-				if (stmt != null) stmt.close();
+				if (pstmt != null) pstmt.close();
 				if (conn != null) conn.close();
 			} catch (Exception e2) {
 				e2.printStackTrace();

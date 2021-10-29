@@ -52,8 +52,8 @@ private static PerformanceDBBean instance=new PerformanceDBBean();
 			
 		
 		sql="insert into performance(p_code, p_type, p_title, p_area, p_date, p_performer, p_price, p_seat, P_DESCRIPTION, p_regdate, p_rating,"
-				+ "p_fname, p_fsize, p_rfname) "
-				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
+				+ "p_fname, p_fsize, p_rfname, p_time) "
+				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, number);
 		pstmt.setString(2, board.getP_type());
@@ -69,6 +69,7 @@ private static PerformanceDBBean instance=new PerformanceDBBean();
 		pstmt.setString(12, board.getP_fname());
 		pstmt.setInt(13, board.getP_fsize());
 		pstmt.setString(14, board.getP_rfname());
+		pstmt.setInt(15, board.getP_time());
 		pstmt.executeUpdate();
 		
 		re=1;
@@ -127,6 +128,7 @@ private static PerformanceDBBean instance=new PerformanceDBBean();
 					board.setP_ref(rs.getInt(15));
 					board.setP_step(rs.getInt(16));
 					board.setP_level(rs.getInt(17));
+					board.setP_time(rs.getInt(18));
 					
 					performanceList.add(board);
 
@@ -182,6 +184,7 @@ private static PerformanceDBBean instance=new PerformanceDBBean();
 				board.setP_ref(rs.getInt(15));
 				board.setP_step(rs.getInt(16));
 				board.setP_level(rs.getInt(17));
+				board.setP_time(rs.getInt(18));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

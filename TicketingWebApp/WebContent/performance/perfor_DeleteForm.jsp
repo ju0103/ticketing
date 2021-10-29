@@ -10,8 +10,10 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<link href="../css/styles.css" rel="stylesheet" />
 </head>
 <body>
+<jsp:include page="../managerMain/managerHeader.jsp" />	
 	<center>
 		<h1>공연 삭제</h1>
 		<form name="form" method="post" action="perfor_DeleteOk.jsp?manager_id=<%= manager_id %>&p_code=<%= p_code %>">
@@ -37,5 +39,10 @@
 			</table>
 		</form>
 	</center>
+	<jsp:include page="../memberMain/footer.jsp" />	<!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="../js/scripts.js"></script>
+	
 </body>
 </html>

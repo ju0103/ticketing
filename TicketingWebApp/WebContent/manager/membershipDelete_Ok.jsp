@@ -1,8 +1,10 @@
 <%@page import="ticketing.manager.ManagerDBBean"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-    <%-- request pwd 파라미터 값 받기 --%>
-<%
+    
+<%	
+	String checkManager = session.getAttribute("manager").toString();
+	if(checkManager == "yes"){
 	String id = request.getParameter("member_id");
 	ManagerDBBean db = ManagerDBBean.getInstance();
 	
@@ -22,6 +24,7 @@
 		history.go(-1);
 		</script>
 <%
+	}
 	}
 %>
 <html>

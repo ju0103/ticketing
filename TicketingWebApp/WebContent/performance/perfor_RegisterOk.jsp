@@ -41,6 +41,9 @@ if(re==0){
 PerformanceBean board = new PerformanceBean();
 Timestamp regdate = new Timestamp(System.currentTimeMillis());
 
+String addr = multi.getParameter("p_area")+" ";
+String detailaddr = multi.getParameter("p_detailarea");
+String area = addr+detailaddr;
 
 
 if(file != null){
@@ -49,7 +52,7 @@ if(file != null){
 }
 	board.setP_type(multi.getParameter("p_type"));
 	board.setP_title(multi.getParameter("p_title"));
-	board.setP_area(multi.getParameter("p_area"));
+	board.setP_area(area);
 	board.setP_date(multi.getParameter("p_date"));
 	board.setP_performer(multi.getParameter("p_performer"));
 	board.setP_price(Integer.parseInt(multi.getParameter("p_price")));
@@ -57,6 +60,7 @@ if(file != null){
 	board.setP_description(multi.getParameter("p_description"));
 	board.setP_rating(Integer.parseInt(multi.getParameter("p_rating")));
 	board.setP_regdate(new Timestamp(System.currentTimeMillis()));
+	board.setP_time(Integer.parseInt(multi.getParameter("p_time")));
 	
 	if(file != null){
 		board.setP_fname(file);
@@ -64,8 +68,6 @@ if(file != null){
 		board.setP_rfname(oriFile);
 	}
 	
-
-
 	PerformanceDBBean pdb = PerformanceDBBean.getInstance();
 	if(pdb.insertBoard(board) == 1){
 		

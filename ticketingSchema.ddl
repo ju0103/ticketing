@@ -4,6 +4,43 @@
 --   유형:      Oracle Database 11g
 
 
+<<<<<<< HEAD
+=======
+--
+DROP TABLE RESERVATION;
+
+CREATE TABLE RESERVATION(
+reserve_id number(7) NOT NULL
+CONSTRAINT PK PRIMARY KEY,
+concert_id NUMBER(7) REFERENCES PERFORMANCE (P_CODE),
+user_id varchar(20 BYTE) references member (member_id),
+reserve_date varchar2(30 BYTE),
+reserve_seat VARCHAR2(10),
+r_people number(2)
+);
+
+
+
+
+
+select * from RESERVATION;
+select * from performance;
+select * from member;
+select * from manager;
+
+CREATE USER ticketing
+    IDENTIFIED BY 1234
+    DEFAULT TABLESPACE users 
+    QUOTA 10485760 ON users
+    ACCOUNT UNLOCK;
+    
+
+GRANT UNLIMITED TABLESPACE TO TICKETING;
+
+GRANT CONNECT,RESOURCE,DBA TO TICKETING;
+GRANT CREATE TABLE, CREATE VIEW TO TICKETING;
+GRANT CONNECT,DBA TO TICKETING;
+>>>>>>> 239a03f468a4893030cbd105b70e296833df60a7
 
 CREATE USER ticketing IDENTIFIED BY ACCOUNT UNLOCK ;
 
@@ -69,6 +106,7 @@ CREATE UNIQUE INDEX ticketing.member_pk ON
 
 ALTER TABLE ticketing.member
     ADD CONSTRAINT member_pk PRIMARY KEY ( member_id )
+<<<<<<< HEAD
         USING INDEX ticketing.member_pk;
 
 CREATE TABLE ticketing.performance (
@@ -89,6 +127,36 @@ CREATE TABLE ticketing.performance (
     p_ref         NUMBER(5),
     p_step        NUMBER(5),
     p_level       NUMBER(5)
+=======
+        USING INDEX PCTFREE 10 INITRANS 2 TABLESPACE users LOGGING
+            STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
+            DEFAULT );
+            
+            
+drop table ticketing.performance;
+
+CREATE TABLE ticketing.performance (
+    p_code      NUMBER(7) NOT NULL, --문자열 시 변환 이슈로 정수형으로 수정
+    p_type      VARCHAR2(10 BYTE),
+    p_title     VARCHAR2(50 BYTE),
+    p_area      VARCHAR2(100 BYTE),
+    p_date      VARCHAR2(50 BYTE),
+    p_performer VARCHAR2(50 BYTE),
+    p_price     NUMBER(7),
+    p_seat     NUMBER(6),
+    --p_poster    VARCHAR2(20 BYTE),
+    P_DESCRIPTION   VARCHAR2(2000 BYTE),
+    p_regdate   DATE,
+    p_rating    NUMBER(2),--10/24 관람연령등급컬럼 생성
+    p_FNAME VARCHAR2(100 BYTE), --10/24 파일명 컬럼 생성
+	p_FSIZE NUMBER(10,0), -- 10/24 파일사이즈 컬럼 생성
+    p_RFNAME VARCHAR2(100), -- 10/24 파일 실제 이름 컬럼 생성
+    p_ref number(5), --10/25 페이징컬럼 추가 예정 컬럼 생성
+    p_step number(5),
+    p_level number(5),
+    p_time  number(7)
+    
+>>>>>>> 239a03f468a4893030cbd105b70e296833df60a7
 )
 PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
     STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
@@ -103,8 +171,15 @@ CREATE UNIQUE INDEX ticketing.performance_pk ON
         LOGGING;
 
 ALTER TABLE ticketing.performance
+<<<<<<< HEAD
     ADD CONSTRAINT performance_pk PRIMARY KEY ( p_code )
         USING INDEX ticketing.performance_pk;
+=======
+    ADD CONSTRAINT performance_pk PRIMARY KEY (p_code)
+        USING INDEX PCTFREE 10 INITRANS 2 TABLESPACE users LOGGING
+            STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
+            DEFAULT );
+>>>>>>> 239a03f468a4893030cbd105b70e296833df60a7
 
 
 

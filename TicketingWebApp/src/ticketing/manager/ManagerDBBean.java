@@ -177,7 +177,8 @@ public class ManagerDBBean {
 								pstmt = conn.prepareStatement(sql);
 								pstmt.setString(1, id);
 								re = pstmt.executeUpdate();
-							} else { // 해당 아이디 없음
+							} else {
+								// 해당 아이디 없음
 								re = 0;
 							}
 					} catch (Exception e) {

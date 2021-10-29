@@ -6,118 +6,130 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<script type="text/javascript" src="../js/check.js" charset="utf-8" ></script>
+<link href="../css/styles.css" rel="stylesheet" />
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    function addressPopup() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+               
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                if(data.userSelectedType === 'R'){
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    document.getElementById("sample6_extraAddress").value = extraAddr;
+                
+                } else {
+                    document.getElementById("sample6_extraAddress").value = '';
+                }
+
+                document.getElementById('sample6_postcode').value = data.zonecode;
+                document.getElementById("sample6_address").value = addr;
+                document.getElementById("sample6_detailAddress").focus();
+            }
+        }).open();
+    }
+</script>
+
 </head>
 <body>
-	<h1>공연 등록</h1>
+<jsp:include page="../managerMain/managerHeader.jsp" />	
+
 	
-		<%-- 10/27 한글처리 => accept-charset="EUC-KR" 추가  / 파일명 한글일 때 출력 시 깨짐 현상있음--%>	
-		<form method="post" action="perfor_RegisterOk.jsp" enctype="multipart/form-data" accept-charset="EUC-KR">
-		<table>
-			<tr height="30">
-				<td width="50">
-					장르
-				</td>
-				<td>
-					<select name="p_type" >
-					    <option value="none">=== 선택 ===</option>
+		<!-- manager register form -->
+	<div class="container py-5">
+		<div class="text-center mb-5">
+			<h2 class="fw-bolder">공연 등록</h2>
+		</div>
+		<form id="contactForm" method="post" action="./perfor_RegisterOk.jsp" name="reg_frm" enctype="multipart/form-data" accept-charset="EUC-KR">
+			<div class="mb-3">
+				<label class="form-label" for="type">장르</label>
+				<select class="form-control" name="p_type" >
+					    <option value="">=== 선택 ===</option>
 					    <option value="concerts">콘서트</option>
 					    <option value="musicals">뮤지컬</option>
 					    <option value="plays">연극</option>
 					    <option value="opera">오페라/무용</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td width="80">
-					공연명
-				</td>
-				<td width="200">
-					<input name="p_title" type="text">
-				</td>
-				<td>		 
-					<input type="file" name="p_fname">  
-				</td>
-			</tr>
-			<tr>
-				<td width="80">
-					출연진
-				</td>
-				<td width="200">
-					<input name="p_performer" type="text">
-				</td>
-			</tr>
-			<tr>
-				<td width="80">
-					장소
-				</td>
-				<td width="250">
-					<input type="text" name="p_area"> <%-- 10/24 장소 인풋 태그 관련  임시 수정 --%>
-				</td>
-			</tr>
-			<tr>
-				<td width="80">
-					공연일시
-				</td>
-				<td width="500">
-					<input type="date" name="p_date">
-				</td>
-			</tr>
-			<tr>
-				<td width="80">
-					공연시간
-				</td>
-				<td width="200">
-					<input name="p_time" type="text" width="100">분
-				</td>
-			</tr>
-			<tr>
-				<td width="80">
-					관람연령
-				</td>
-				<td width="200">
-					만<input name="p_rating" type="text" width="50">세이상
-				</td>
-			</tr>
-			<tr>
-				<td width="80">
-					관람인원
-				</td>
-				<td width="200">
-					<input name="p_seat" type="text" width="50">명
-				</td>
-			</tr>
-			<tr>
-				<td width="80">
-					가격
-				</td>
-				<td width="200">
-					전석<input name="p_price" type="text">원
-				</td>
-			</tr>
-			<tr height="30">
-				<td width="80">
-					공연 설명
-				</td>
-				<td colspan="4">
-					<textarea name="p_description" rows="10" cols="65"></textarea>
-				</td>
-			</tr>
-			<tr>
-				<td width="80">
-					암&nbsp;&nbsp;호
-				</td>
-				<td colspan="3">
-					<input name="manager_pwd" type="password" size="12" maxlength="12">
-				</td>
-			</tr>
-			<tr height="50" align="center">
-				<td colspan="4">
-					<input type="submit" value="등록">&nbsp;
-					<input type="reset" value="다시 입력">&nbsp;
-					<input type="button" value="목록으로" onclick="location.href='perfor_List.jsp'">
-				</td>
-			</tr>
-		</table>
-	</form>
+				</select>
+			</div>	
+			<div>
+			<label class="form-label" for="type">포스터</label>
+			<input class="form-control" type="file" name="p_fname">
+			</div>  
+			<div class="mb-3">
+				<label class="form-label" for="title">공연명</label>
+				<input class="form-control" id="p_title" name="p_title" type="text" placeholder="공연명">
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="performer">출연진</label>
+				<input class="form-control" id="p_performer" name="p_performer" type="text" placeholder="출연진">
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="area">장소</label><br>
+				<input  type="text" id="sample6_postcode" placeholder="우편번호">
+				<input  type="button" onclick="addressPopup()" value="우편번호 찾기"><br>
+				<input  type="text" id="sample6_address" size="50" placeholder="주소" name="p_area"><br>
+				<input  type="text" id="sample6_detailAddress" size="20" placeholder="상세주소" name="p_detailarea">
+				<input  type="text" id="sample6_extraAddress" size="30" placeholder="참고항목">
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="date">공연일시</label>
+				<input class="form-control" id="p_date" name="p_date" type="datetime-local">
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="time">공연시간</label>
+				<input class="form-control" id="p_time" name="p_time" type="number" placeholder="공연시간">
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="rating">관람연령</label>
+				<input class="form-control" id="p_rating" name="p_rating" type="number" placeholder="관람연령">
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="seat">관람인원</label>
+				<input class="form-control" id="p_seat" name="p_seat" type="number" placeholder="관람인원">
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="price">가격</label>
+				<input class="form-control" id="p_price" name="p_price" type="number" placeholder="가격">
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="description">공연 설명</label>
+				<textarea class="form-control" id="p_description" name="p_description" rows="10" cols="65" placeholder="내용을 입력하세요."></textarea>
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="pwd">암호</label>
+				<input class="form-control" id="manager_pwd" name="manager_pwd" type="password">
+			</div>
+			<div class="d-grid">
+				<button class="btn btn-primary btn-lg" type="button" onclick="perforCheck_ok()">등록</button><br>
+				<button class="btn btn-primary btn-lg" type="reset">다시 입력</button>
+			</div>
+		</form>
+	</div>
+	
+
+	<jsp:include page="../memberMain/footer.jsp" />
+	
+	<!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="../js/scripts.js"></script>
 </body>
+	
 </html>
