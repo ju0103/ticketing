@@ -5,30 +5,47 @@
 <head>
 	<meta charset="EUC-KR">
 	<title>회원가입</title>
+	<script type="text/javascript" src="../js/check.js" charset="utf-8" ></script>
+	<!-- CSS -->
+    <link href="../css/styles.css" rel="stylesheet" />
 </head>
 <body>
-	<form method="post" action="managerRegisterOk.jsp">
-		<table>
-			<tr>
-				<td>아이디</td>
-				<td><input type="text" name="manager_id" size="20" maxlength="20"></td>
-			</tr>
-			<tr>
-				<td>비밀번호</td>
-				<td><input type="password" name="manager_pwd" size="20" maxlength="20"></td>
-			</tr>
-			<tr>
-				<td>비밀번호 확인</td>
-				<td><input type="password" name="check_pwd" size="20" maxlength="20"></td>
-			</tr>
-			<tr>
-				<td>이름</td>
-				<td><input type="text" name="manager_name" size="20" maxlength="20"></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="submit" value="관리자 등록"></td>
-			</tr>
-		</table>
-	</form>
+<jsp:include page="../managerMain/managerHeader.jsp" />
+
+		<!-- manager register form -->
+	<div class="container py-4">
+		<div class="text-center mb-5">
+			<h2 class="fw-bolder">관리자 등록</h2>
+		</div>
+		<form id="contactForm" method="post" action="./managerRegisterOk.jsp" name="reg_frm">
+			<div class="mb-3">
+				<label class="form-label" for="id">아이디</label>
+				<input class="form-control" id="manager_id" name="manager_id" type="text" placeholder="아이디">
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="pwd">비밀번호</label>
+				<input class="form-control" id="manager_pwd" name="manager_pwd" type="password" placeholder="Passwowrd">
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="pwd">비밀번호 확인</label>
+				<input class="form-control" id="check_pwd" name="check_pwd" type="password" placeholder="Passwowrd">
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="name">이름</label>
+				<input class="form-control" id="manager_name" name="manager_name" type="text" placeholder="Name">
+			</div>
+			<div class="d-grid">
+				<button class="btn btn-primary btn-lg" type="button" onclick="check_ok()">회원가입</button>
+			</div>
+		</form>
+	</div>
+	
+	
 </body>
+<jsp:include page="../memberMain/footer.jsp" />
+	
+	<!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="../js/scripts.js"></script>
 </html>

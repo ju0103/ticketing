@@ -4,8 +4,8 @@
 --   유형:      Oracle Database 11g
 
 
-
-select*from performance;
+select * from performance;
+select * from member;
 
 CREATE USER ticketing
     IDENTIFIED BY 1234
@@ -60,12 +60,13 @@ ALTER TABLE ticketing.member
             
             
 drop table ticketing.performance;
+
 CREATE TABLE ticketing.performance (
     p_code      NUMBER(7) NOT NULL, --문자열 시 변환 이슈로 정수형으로 수정
     p_type      VARCHAR2(10 BYTE),
-    p_title     VARCHAR2(30 BYTE),
-    p_area      VARCHAR2(10 BYTE),
-    p_date      date,
+    p_title     VARCHAR2(50 BYTE),
+    p_area      VARCHAR2(100 BYTE),
+    p_date      VARCHAR2(50 BYTE),
     p_performer VARCHAR2(50 BYTE),
     p_price     NUMBER(7),
     p_seat     NUMBER(6),
@@ -78,7 +79,8 @@ CREATE TABLE ticketing.performance (
     p_RFNAME VARCHAR2(100), -- 10/24 파일 실제 이름 컬럼 생성
     p_ref number(5), --10/25 페이징컬럼 추가 예정 컬럼 생성
     p_step number(5),
-    p_level number(5)
+    p_level number(5),
+    p_time  number(7)
     
 )
 PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING

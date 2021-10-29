@@ -1,5 +1,6 @@
 package ticketing.performance;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class PerformanceBean {
@@ -9,6 +10,7 @@ public class PerformanceBean {
 	private String  p_area;
 	private String p_date; //타입 오류로 string 으로 대체 
 	private String p_performer;
+	private int p_time;
 	private int p_price;
 	private int p_seat;
 	private String p_description;
@@ -56,6 +58,7 @@ public class PerformanceBean {
 	
 
 
+
 	public int getP_ref() {
 		return p_ref;
 	}
@@ -85,12 +88,34 @@ public class PerformanceBean {
 	}
 
 
+
 	public String getP_date() {
 		return p_date;
 	}
+
+
+
 	public void setP_date(String p_date) {
 		this.p_date = p_date;
 	}
+
+
+	public int getP_time() {
+		return p_time;
+	}
+
+
+
+
+
+	public void setP_time(int p_time) {
+		this.p_time = p_time;
+	}
+
+
+
+
+
 	public String getP_fname() {
 		return p_fname;
 	}

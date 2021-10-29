@@ -4,9 +4,11 @@
 <html>
 <head>
 	<meta charset="EUC-KR">
-	<title>관리자 메인 페이지</title>
+	<link href="../css/styles.css" rel="stylesheet" />
 </head>
 <body>
+<jsp:include page="../managerMain/managerHeader.jsp" />	
+
 <%
 	if (session.getAttribute("manager") == null) {
 %>
@@ -73,5 +75,12 @@
 <%
 	}
 %>
+
+<jsp:include page="../memberMain/footer.jsp" />
+	<!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="../js/scripts.js"></script>
+	
 </body>
 </html>

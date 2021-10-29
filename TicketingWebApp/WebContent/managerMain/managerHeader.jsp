@@ -11,10 +11,15 @@
     <style>
     	.ticketing{ text-decoration: none; color: #fff; }
     </style>
+    <script>
+    	function sessionCheck(){
+    		alert("로그인이 필요한 서비스입니다.");
+    	}
+    </script>
 </head>
 <body>
 	<%
-		if (session.getAttribute("member") == null) {
+		if (session.getAttribute("manager") == null) {
 	%>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container">
@@ -25,9 +30,9 @@
 				
 				<div class="collapse navbar-collapse" id="navbarContent">
 					<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-						<li class="nav-item active"><a class="nav-link" href="../member/memberLoginForm.jsp">로그인</a></li>
-						<li class="nav-item active"><a class="nav-link" href="../member/memberRegisterForm.jsp">회원가입</a></li>
-						<li class="nav-item"><a class="nav-link" href="../member/memberLoginForm.jsp">마이페이지</a></li>
+						<li class="nav-item active"><a class="nav-link" href="../manager/managerLoginForm.jsp">로그인</a></li>
+						<li class="nav-item active"><a class="nav-link" href="../manager/managerRegisterForm.jsp">관리자 등록</a></li>
+						<li class="nav-item"><a class="nav-link" href="../manager/managerLoginForm.jsp" onclick="sessionCheck();">관리자 페이지</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">고객센터</a></li>
 					</ul>
 				</div>
@@ -45,14 +50,12 @@
 				
 				<div class="collapse navbar-collapse" id="navbarContent">
 					<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-						<li class="nav-item active"><a class="nav-link" href="../member/memberLogout.jsp">로그아웃</a></li>
+						<li class="nav-item active"><a class="nav-link" href="../manager/managerLogout.jsp">로그아웃</a></li>
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" id="navbarDropdown" href="../member/memberLoginForm.jsp" role="button" data-bs-toggle="dropdown" aria-expanded="false">마이페이지</a>
+							<a class="nav-link dropdown-toggle" id="navbarDropdown" href="../member/memberLoginForm.jsp" role="button" data-bs-toggle="dropdown" aria-expanded="false">관리자 페이지</a>
 							<ul class="dropdown-menu show" aria-labelledby="navbarDropdown" data-bs-popper="none">
-								<li><a class="dropdown-item" href="../member/memberReservationForm.jsp">나의 예매</a>
-								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="../member/memberUpdateForm.jsp">회원정보수정</a>
-								<li><a class="dropdown-item" href="../member/memberDeleteForm.jsp">탈퇴하기</a>
+								<li><a class="dropdown-item" href="../performance/perfor_List.jsp">공연 관리</a>
+								<li><a class="dropdown-item" href="../manager/membershipForm.jsp">회원 관리</a>
 							</ul>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="#">고객센터</a></li>
