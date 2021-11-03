@@ -22,7 +22,7 @@
 		alert("삭제 성공");
 		</script>
 	<%
-	response.sendRedirect("perfor_List.jsp");
+	response.sendRedirect("manager_perfor_List.jsp");
 	}else if(re == 0){
 		%>
 		<script type="text/javascript">

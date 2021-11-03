@@ -5,6 +5,7 @@
 <%
 	String isManager = (String)session.getAttribute("manager");
 	int faq_code = Integer.parseInt(request.getParameter("faq_code"));
+	
 	if (isManager.equals("yes") ){
 		FaqDBBean faqDb = FaqDBBean.getInstance();
 		int deleteResult = faqDb.deleteFaq(faq_code);
@@ -13,14 +14,14 @@
 %>
 			<script type="text/javascript">
 				alert("삭제되었습니다.");
-				document.location.href="./faqList.jsp";
+				document.location.href="./manager_faqList.jsp?faq_type=100";
 			</script>
 <%		
 		} else {
 %>
 			<script type="text/javascript">
 				alert("삭제 실패하였습니다.");
-				document.location.href="./faqList.jsp";
+				document.location.href="./manager_faqList.jsp";
 			</script>
 <%		
 		}

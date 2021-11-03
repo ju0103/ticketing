@@ -26,7 +26,7 @@
 	%>
 				<script>
 					alert("존재하지 않는 회원입니다.");
-					history.go(-1);
+					document.location.href="./memberRegisterForm.jsp";
 				</script>
 	<%
 		} else {

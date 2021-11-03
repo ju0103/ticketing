@@ -11,7 +11,7 @@
 %>
 		<script>
 			alert("FAQ가 수정되었습니다.");
-			document.location.href="../faq/faqList.jsp";
+			document.location.href="../faq/manager_faqList.jsp";
 		</script>
 <%
 	} else {

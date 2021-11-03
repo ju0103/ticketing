@@ -7,7 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
     <%-- 한글 구현완(업로드파일x)/ 메인 페이지 버튼 추가 예정 / 페이징  --%>
-    <%
+<%
     PerformanceDBBean pdb = PerformanceDBBean.getInstance();
     ArrayList<PerformanceBean> perforList = pdb.listBoard();
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -15,7 +15,7 @@
     String  p_type, p_title,p_area,p_date,p_performer,p_fname,p_rfname,p_detailarea;
     int p_code, p_price,p_seat,p_fsize,p_ref,p_step,p_level,p_rating,p_time;
     Timestamp p_regdate;
-    %>
+%>
 
 <html>
 <head>
@@ -26,10 +26,10 @@
     <link href="../css/styles.css" rel="stylesheet" />
 </head>
 <body>
-<jsp:include page="../managerMain/managerHeader.jsp" />	
 	<%
 		if ((String)session.getAttribute("manager") == "yes") {
 	%>
+			<jsp:include page="../managerMain/managerHeader.jsp" />	
 			<center>
 			<table  class="table table-striped table-bordered table-hover" >
 					<tr height="25">

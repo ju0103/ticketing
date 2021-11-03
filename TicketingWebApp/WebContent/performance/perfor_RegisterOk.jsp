@@ -71,7 +71,7 @@ if(file != null){
 	PerformanceDBBean pdb = PerformanceDBBean.getInstance();
 	if(pdb.insertBoard(board) == 1){
 		
-		response.sendRedirect("perfor_List.jsp");
+		response.sendRedirect("manager_perfor_List.jsp");
 	}else{
 		response.sendRedirect("perfor_RegisterForm.jsp");
 	}

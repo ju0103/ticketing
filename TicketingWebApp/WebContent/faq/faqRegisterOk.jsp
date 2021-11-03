@@ -12,7 +12,7 @@
 %>
 	<script>
 		alert("등록 완료");
-		document.location.href="./faqList.jsp";
+		document.location.href="./manager_faqList.jsp";
 	</script>
 <%
 	} else {
