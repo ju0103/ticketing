@@ -149,6 +149,54 @@ private static PerformanceDBBean instance=new PerformanceDBBean();
 		return performanceList;
 	}
 	
+	public PerformanceBean getPerformance(String p_code){
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		PerformanceBean performance = null;
+		
+		try {
+			conn = getConnection();
+			String sql="select * from performance where p_code = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, p_code);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				performance = new PerformanceBean();
+				performance.setP_code(rs.getInt(1));
+				performance.setP_type(rs.getString(2));
+				performance.setP_title(rs.getString(3));
+				performance.setP_area(rs.getString(4));
+				performance.setP_date(rs.getString(5));
+				performance.setP_performer(rs.getString(6));
+				performance.setP_price(rs.getInt(7));
+				performance.setP_seat(rs.getInt(8));
+				performance.setP_description(rs.getString(9));
+				performance.setP_regdate(rs.getTimestamp(10));
+				performance.setP_rating(rs.getInt(11));
+				performance.setP_fname(rs.getString(12));
+				performance.setP_fsize(rs.getInt(13));
+				performance.setP_rfname(rs.getString(14));
+				performance.setP_ref(rs.getInt(15));
+				performance.setP_step(rs.getInt(16));
+				performance.setP_level(rs.getInt(17));
+				performance.setP_time(rs.getInt(18));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return performance;
+	}
+	
 	public PerformanceBean getBoard(int p_code) {
 		Connection conn=null;
 		PreparedStatement pstmt=null;

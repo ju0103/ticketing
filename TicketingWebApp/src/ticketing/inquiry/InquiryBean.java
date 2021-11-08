@@ -9,9 +9,11 @@ public class InquiryBean {
 	private String i_title;
 	private String i_type;
 	private String i_quest;
-	private String i_ip;
+	private String mem_ip;
+	private String admin_ip;
 	private int i_ref;
-	private Timestamp i_regdate;
+	private Timestamp mem_regdate;
+	private Timestamp admin_regdate;
 	
 	public String getMember_id() {
 		return member_id;
@@ -49,11 +51,17 @@ public class InquiryBean {
 	public void setI_quest(String i_quest) {
 		this.i_quest = i_quest;
 	}
-	public String getI_ip() {
-		return i_ip;
+	public String getMem_ip() {
+		return mem_ip;
 	}
-	public void setI_ip(String i_ip) {
-		this.i_ip = i_ip;
+	public void setMem_ip(String mem_ip) {
+		this.mem_ip = mem_ip;
+	}
+	public String getAdmin_ip() {
+		return admin_ip;
+	}
+	public void setAdmin_ip(String admin_ip) {
+		this.admin_ip = admin_ip;
 	}
 	public int getI_ref() {
 		return i_ref;
@@ -61,10 +69,16 @@ public class InquiryBean {
 	public void setI_ref(int i_ref) {
 		this.i_ref = i_ref;
 	}
-	public Timestamp getI_regdate() {
-		return i_regdate;
+	public Timestamp getMem_regdate() {
+		return mem_regdate;
 	}
-	public void setI_regdate(Timestamp i_regdate) {
-		this.i_regdate = i_regdate;
+	public void setMem_regdate(Timestamp mem_regdate) {
+		this.mem_regdate = mem_regdate;
+	}
+	public Timestamp getAdmin_regdate() {
+		return admin_regdate;
+	}
+	public void setAdmin_regdate(Timestamp admin_regdate) {
+		this.admin_regdate = admin_regdate;
 	}
 }
