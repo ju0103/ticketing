@@ -63,7 +63,7 @@
 <body>
 	<center>
 	<form action="performInfo_ok.jsp" method="post" name="form" enctype="multipart/form-data">
-		<jsp:include page="../memberMain/header.jsp"></jsp:include>
+		<jsp:include page="../memberMain/member_Header.jsp"></jsp:include>
 		<div class="container py-4">
 			<div class="container">
 				<div class="row p-4">
@@ -170,7 +170,7 @@
 	</form>
 	</center>
 	<!-- footer -->
-	
+		<jsp:include page="../memberMain/member_Footer.jsp"></jsp:include>
 	<!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->

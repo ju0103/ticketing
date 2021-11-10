@@ -43,7 +43,7 @@ public class ReviewDBBean {
 				number = rs.getInt(1) + 1;
 			}
 			
-			sql="insert into review(p_code, r_id, r_name, r_title, r_content, r_date, r_pwd, r_ip, r_fname, r_fsize, r_rfname) "
+			sql="insert into review(performance_p_code, r_id, r_name, r_title, r_content, r_date, r_pwd, r_ip, r_fname, r_fsize, r_rfname) "
 					+ "values(?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, p_code);
@@ -105,7 +105,7 @@ public class ReviewDBBean {
 				ReviewBean.pageNum = Integer.parseInt(pageNumber);
 				absolutePage = (ReviewBean.pageNum-1) * ReviewBean.pageSize+1;
 			}
-			String sql="select * from review where p_code=? order by r_id desc";
+			String sql="select * from review where performance_p_code=? order by r_id desc";
 			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			pstmt.setInt(1, p_code);
 			rs = pstmt.executeQuery();
@@ -161,7 +161,7 @@ public class ReviewDBBean {
 		try {
 			conn = getConnection();
 			
-			sql="select * from review where p_code=? and r_id=?";
+			sql="select * from review where performance_p_code=? and r_id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, p_code);
 			pstmt.setInt(2, r_id);
@@ -206,7 +206,7 @@ public class ReviewDBBean {
 		
 		try {
 			conn = getConnection();
-			sql="select r_pwd from review where r_id=? and p_code=?";
+			sql="select r_pwd from review where r_id=? and performance_p_code=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, r_id);
 			pstmt.setInt(2, p_code);
@@ -218,7 +218,7 @@ public class ReviewDBBean {
 				if (!pwd.equals(r_pwd)) {
 					re = 0;
 				}else {
-					sql="delete review where r_id=? and p_code=?";
+					sql="delete review where r_id=? and performance_p_code=?";
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setInt(1, r_id);
 					pstmt.setInt(2, p_code);
@@ -251,7 +251,7 @@ public class ReviewDBBean {
 		
 		try {
 			conn = getConnection();
-			sql="select r_pwd from review where p_code=? and r_id=?";
+			sql="select r_pwd from review where performance_p_code=? and r_id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, review.getPerform_code());
 			pstmt.setInt(2, review.getReview_id());
@@ -263,7 +263,7 @@ public class ReviewDBBean {
 				if (!pwd.equals(review.getReview_pwd())) {
 					re = 0;
 				} else {
-					sql="update review set r_title=?, r_content=? where p_code=? and r_id=?";
+					sql="update review set r_title=?, r_content=? where performance_p_code=? and r_id=?";
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1, HanConv.toKorean(review.getReview_title()));
 					pstmt.setString(2, HanConv.toKorean(review.getReview_content()));
@@ -298,7 +298,7 @@ public class ReviewDBBean {
 		
 		try {
 			conn = getConnection();
-			sql = "select r_fname, r_rfname from review where p_code=? and r_id=?";
+			sql = "select r_fname, r_rfname from review where performance_p_code=? and r_id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, p_code);
 			pstmt.setInt(2, r_id);
@@ -332,7 +332,7 @@ public class ReviewDBBean {
 		
 		try {
 			conn = getConnection();
-			sql="select count(*) from review where p_code=?";
+			sql="select count(*) from review where performance_p_code=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, p_code);
 			rs = pstmt.executeQuery();

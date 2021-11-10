@@ -249,7 +249,7 @@ private static PerformanceDBBean instance=new PerformanceDBBean();
 		return board;
 	}
 	
-	//10-25 ∫Ø»÷∂ı Update
+	// delete
 	public int deleteBoard(String manager_id, String manager_pwd, int p_code){
 		Connection conn=null;
 		PreparedStatement pstmt=null;
@@ -281,15 +281,71 @@ private static PerformanceDBBean instance=new PerformanceDBBean();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			}finally {
-				try {
-					if(rs != null) rs.close();
-					if(pstmt != null) pstmt.close();
-					if(conn != null) conn.close();
-				} catch (Exception e2) {
-					e2.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return re;
+	}
+	
+	public int editBoard(PerformanceBean board ,String id, String pw, int pcode) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="";
+		int re=-1;
+		String check_pwd= "";
+		
+		try {
+			conn = getConnection();
+			sql="select manager_pwd from manager where manager_id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next())  {
+				check_pwd = rs.getString(1); 
+				System.out.println("@@### check_pwd "+ check_pwd);
+				System.out.println("@@### pwd "+ pw);
+				if (!pw.equals(check_pwd)) {
+					re=0;
+				}else {
+					sql="UPDATE PERFORMANCE SET p_type=?, p_title=?, p_performer=?, p_area=?, p_date=?, p_time=?, p_rating=?,"
+							+ " p_seat=?, p_price=?, p_description=?, p_fname=? "
+							+ "WHERE p_code=?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, board.getP_type());
+					pstmt.setString(2, board.getP_title());
+					pstmt.setString(3, board.getP_performer());
+					pstmt.setString(4, board.getP_area());
+					pstmt.setString(5, board.getP_date());
+					pstmt.setInt(6, board.getP_time());
+					pstmt.setInt(7, board.getP_rating());
+					pstmt.setInt(8,  board.getP_seat());
+					pstmt.setInt(9, board.getP_price());
+					pstmt.setString(10, board.getP_description());
+					pstmt.setString(11, board.getP_fname());
+					pstmt.setInt(12, pcode);
+					pstmt.executeUpdate();
+					re = 1;
 				}
 			}
-			return re;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
 		}
+			return re;
+	}
 }

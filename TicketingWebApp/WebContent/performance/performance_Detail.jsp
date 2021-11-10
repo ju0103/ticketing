@@ -6,7 +6,6 @@
 <%@page import="ticketing.performance.PerformanceDBBean"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-    <%-- 한글 구현완(업로드파일x)/ 메인 페이지 버튼 추가 예정 / 페이징  --%>
 <%
 	String p_code = request.getParameter("p_code");
 
@@ -46,9 +45,10 @@
 	<meta name="viewport" content="width=deivce-width, initial-scale=1">
 	<title>Insert title here</title>
 	<!-- CSS -->
-    <link href="../css/styles.css" rel="stylesheet" />
+	<link href="../css/styles.css" rel="stylesheet" />
 </head>
 <body>
+
 	<div class="container mt-5">
 		<div class="row">
 			<div class="col-lg-8">
@@ -81,6 +81,14 @@
 								<td>가격</td>
 								<td>전석 <b><%= p_price %></b>원</td>
 							</tr>
+							<tr>
+								<td>
+									<button class="btn btn-primary btn-lg" onclick="location.href='../review/review_list.jsp?p_code=<%= p_code%>'">후기</button>
+								</td>
+								<td>
+									<button class="btn btn-primary btn-lg" onclick="location.href='../reservation/reservation_check.jsp?p_code=<%= p_code%>'">예매하기</button>
+								</td>
+							</tr>
 						</table>
 					</section>
 				</article>
@@ -88,6 +96,7 @@
 		</div>
 	</div>
 	
+
 	<!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->

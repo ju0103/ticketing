@@ -1,5 +1,5 @@
 -- 생성자 Oracle SQL Developer Data Modeler 21.2.0.165.1515
---   위치:        2021-11-08 15:41:37 KST
+--   위치:        2021-11-10 17:02:03 KST
 --   사이트:      Oracle Database 11g
 --   유형:      Oracle Database 11g
 
@@ -107,6 +107,17 @@ ALTER TABLE ticketing.member
     ADD CONSTRAINT member_pk PRIMARY KEY ( member_id )
         USING INDEX ticketing.member_pk;
 
+CREATE TABLE ticketing.notice (
+    n_code      NUMBER(5),
+    n_title     VARCHAR2(20 BYTE),
+    userid      VARCHAR2(20 BYTE),
+    n_date      DATE,
+    n_content   VARCHAR2(1000 BYTE),
+    n_available NUMBER
+)
+PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
+    STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
+
 CREATE TABLE ticketing.performance (
     p_code        NUMBER(7) NOT NULL,
     p_type        VARCHAR2(10 BYTE),
@@ -152,9 +163,9 @@ PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
 CREATE TABLE ticketing.reservation (
     member_member_id   VARCHAR2(20 BYTE) NOT NULL,
     performance_p_code NUMBER(7) NOT NULL,
-    reserve_id         VARCHAR2(20 BYTE) NOT NULL,
+    reserve_id         VARCHAR2(40 BYTE) NOT NULL,
     reserve_date       DATE,
-    reserve_seat       VARCHAR2(5 BYTE)
+    reserve_seat       VARCHAR2(10 BYTE)
 )
 PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
     STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
@@ -173,7 +184,17 @@ ALTER TABLE ticketing.reservation
         USING INDEX ticketing.reservation_pk;
 
 CREATE TABLE ticketing.review (
-    performance_p_code NUMBER(7) NOT NULL
+    performance_p_code NUMBER(7) NOT NULL,
+    r_id               NUMBER(7),
+    r_name             VARCHAR2(20 BYTE),
+    r_title            VARCHAR2(30 BYTE),
+    r_content          VARCHAR2(2000 BYTE),
+    r_date             DATE,
+    r_pwd              VARCHAR2(20 BYTE),
+    r_ip               VARCHAR2(30 BYTE),
+    r_fname            VARCHAR2(100 BYTE),
+    r_fsize            NUMBER(10),
+    r_rfname           VARCHAR2(100 BYTE)
 )
 PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
     STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
@@ -207,33 +228,12 @@ ALTER TABLE ticketing.review
     ADD CONSTRAINT review_performance_fk FOREIGN KEY ( performance_p_code )
         REFERENCES ticketing.performance ( p_code )
     NOT DEFERRABLE;
-    
-    
 
-ALTER TABLE ticketing.notice
-ADD CONSTRAINT reservation_performance_fk FOREIGN KEY ( performance_p_code )
-    REFERENCES ticketing.performance ( p_code )
-NOT DEFERRABLE;
-
-
-CREATE TABLE ticketing.review
-(P_CODE    NUMBER(7) NOT NULL,
- R_ID      NUMBER(7) NOT NULL,
- R_NAME    VARCHAR2(20),
- R_TITLE   VARCHAR2(30) ,
- R_CONTENT VARCHAR2(2000),
- R_DATE    TIMESTAMP(6),
- R_PWD     VARCHAR2(20),
- R_IP      VARCHAR2(30),
- R_FNAME   VARCHAR2(100),
- R_FSIZE   NUMBER(10),
- R_RFNAME  VARCHAR2(100)
-);
 
 
 -- Oracle SQL Developer Data Modeler 요약 보고서: 
 -- 
--- CREATE TABLE                             8
+-- CREATE TABLE                             9
 -- CREATE INDEX                             6
 -- ALTER TABLE                             12
 -- CREATE VIEW                              0

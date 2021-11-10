@@ -9,7 +9,7 @@
 	int p_code =  board.getP_code();
 	String p_title = board.getP_title();
 	String p_description = board.getP_description();
-	String p_rfname = board.getP_rfname();
+	String p_fname = board.getP_fname();
 	String p_area = board.getP_area();
 	String p_date = board.getP_date();
 %>
@@ -55,7 +55,7 @@
 			</tr>
 			<tr>
 				<td width="120">포스터</td>
-				<td width="100" height="50"><img src="../upload/<%=p_rfname %>" width="150" height="150"></td>
+				<td width="100" height="50"><img src="../upload/<%=p_fname %>" width="150" height="150"></td>
 				<td width="120">공연내용</td>
 				<td><%= p_description %></td>
 			</tr>

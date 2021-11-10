@@ -45,7 +45,7 @@
 				
 				<div class="collapse navbar-collapse" id="navbarContent">
 					<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-						<li class="nav-item active"><a class="nav-link" href="../member/memberLogout.jsp">로그아웃</a></li>
+						<li class="nav-item active"><a class="nav-link" href="../member/member_Logout.jsp">로그아웃</a></li>
 						<div class="nav-item btn-group dropdown">
 							<button class="btn btn-dark dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
 								마이페이지
@@ -67,7 +67,6 @@
 		}
 	%>
 	
-	<input type="button" onclick="click(값)">
 	<!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->

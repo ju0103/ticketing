@@ -7,8 +7,8 @@
 <%@page import="com.jspsmart.upload.SmartUpload"%>
 <%@page import="java.net.InetAddress"%>
 <%@page import="java.sql.Timestamp"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=euc-kr"
+    pageEncoding="euc-kr"%>
 <%
 	String path = request.getRealPath("upload");
 	int size = 1024 * 1024;
@@ -16,7 +16,7 @@
 	String file = "";
 	String oriFile = "";
 	
-	MultipartRequest multi = new MultipartRequest(request, path, size, "utf-8", new DefaultFileRenamePolicy());
+	MultipartRequest multi = new MultipartRequest(request, path, size, "euc-kr", new DefaultFileRenamePolicy());
 	Enumeration files = multi.getFileNames();
 	String str = (String)files.nextElement();
 	file = multi.getFilesystemName(str);

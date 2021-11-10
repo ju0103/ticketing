@@ -73,7 +73,7 @@
 										<%= p_code %>
 									</td>
 									<td>
-										<a href="perfor_View.jsp?p_code=<%= p_code %>"><%= p_title %></a>
+										<a href="performance_View.jsp?p_code=<%= p_code %>"><%= p_title %></a>
 										
 									</td>
 									<td align="center">

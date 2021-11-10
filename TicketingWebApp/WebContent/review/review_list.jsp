@@ -3,8 +3,8 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.Timestamp"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=euc-kr"
+    pageEncoding="euc-kr"%>
 <%
 	String pageNum = request.getParameter("pageNum");
 	if(request.getParameter("pageNum") == null){
@@ -14,8 +14,9 @@
 	int p_code = 0;
 	if(request.getParameter("p_code") != null){
 		p_code = Integer.parseInt(request.getParameter("p_code"));
+		System.out.println("@@@###p_code ==>" + p_code);
 	} else {
-		// í…ŒìŠ¤íŠ¸ performance_code
+		// Å×½ºÆ® performance_code
 		p_code = 10000;
 	}
 	
@@ -36,32 +37,35 @@
 	<meta name="viewport" content="width=deivce-width, initial-scale=1">
 	<!-- CSS -->
 	<link href="../css/styles.css" rel="stylesheet" />
-	<!-- íƒ­ ë©”ë‰´ ìŠ¤í¬ë¦½íŠ¸ -->
+	<!-- ÅÇ ¸Ş´º ½ºÅ©¸³Æ® -->
 	<script>
 	function layer_toggle(obj) {
         if (obj.style.display == 'none') obj.style.display = 'block';
         else if (obj.style.display == 'block') obj.style.display = 'none';
 	}
 	</script>
+
 </head>
 <body>
+	<!-- navbar -->
+	<jsp:include page="../memberMain/member_Header.jsp" />
 	<center>
-		<h4 style="margin-top: 50px; margin-bottom: 50px; color: RGB(80, 244, 90)">
-			<p>í‹°ì¼“ ë§¤ë§¤ ë° ì–‘ë„,êµí™˜ì˜ ê¸€ì€ ì‚¬ì „ í†µë³´ ì—†ì´ ì‚­ì œë  ìˆ˜ ìˆìŠµë‹ˆë‹¤.</p>
+		<h4 style="margin-top: 50px; margin-bottom: 50px; color: #708090">
+			<p><b>Æ¼ÄÏ ¸Å¸Å ¹× ¾çµµ,±³È¯ÀÇ ±ÛÀº »çÀü Åëº¸ ¾øÀÌ »èÁ¦µÉ ¼ö ÀÖ½À´Ï´Ù.</p>
 		</h4>
 		<hr>
 		<table width="600">
 			<tr>
 				<td align="right">
-					<a href="review_writeForm.jsp?p_code=<%=p_code %>&pageNum=<%=pageNum %>">ê¸€ ì“° ê¸°</a>
+					<a href="review_writeForm.jsp?p_code=<%=p_code %>&pageNum=<%=pageNum %>">±Û ¾² ±â</a>
 				</td>
 			</tr>
 		</table>
 		<table width="800">
 			<tr height="25">
-				<td width="450" align="center">ê¸€ì œëª©</td>
-				<td width="120" align="center">ì‘ì„±ì</td>
-				<td width="130" align="center">ì‘ì„±ì¼</td>
+				<td width="450" align="center">±ÛÁ¦¸ñ</td>
+				<td width="120" align="center">ÀÛ¼ºÀÚ</td>
+				<td width="130" align="center">ÀÛ¼ºÀÏ</td>
 			</tr>
 			<%
 				for(int i = 0; i < reviewList.size(); i++){
@@ -84,16 +88,16 @@
 							<%
 								}
 							%>
-							<!-- ê²Œì‹œë¬¼ íƒ­  -->
+							<!-- °Ô½Ã¹° ÅÇ  -->
 								<a id="hide<%= i %>" onclick="layer_toggle(document.getElementById('hide<%= i %>')); layer_toggle(document.getElementById('show<%= i %>')); return false;">
 										<%= r_title %><br>
 								</a>
-							<!-- íƒ­ ë‚´ìš© -->
+							<!-- ÅÇ ³»¿ë -->
 							<div id="show<%= i %>" style="display: none;">
 								<table border="1" id="tab_content">
 									<tr height="30">
 										<td width="100" align="center">
-											ê¸€ë‚´ìš©
+											±Û³»¿ë
 										</td>
 									</tr>
 									<tr height="30">
@@ -113,10 +117,10 @@
 										</td>
 									</tr>
 								</table>
-								<input type="button" value="ìˆ˜ì •" onclick="location.href='review_edit.jsp?p_code=<%=p_code %>&r_id=<%=r_id %>'">
-								<input type="button" value="ì‚­ì œ" onclick="location.href='review_delete.jsp?p_code=<%=p_code %>&r_id=<%=r_id %>'">
+								<input type="button" value="¼öÁ¤" onclick="location.href='review_edit.jsp?p_code=<%=p_code %>&r_id=<%=r_id %>'">
+								<input type="button" value="»èÁ¦" onclick="location.href='review_delete.jsp?p_code=<%=p_code %>&r_id=<%=r_id %>'">
 							</div>
-							<!-- íƒ­ ë‚´ìš© -->
+							<!-- ÅÇ ³»¿ë -->
 						</td>
 						<td align="center">
 							<%= r_name %>
@@ -131,5 +135,13 @@
 		</table>
 		<%= ReviewBean.pageNumer(4) %>
 	</center>
+	
+		<!-- footer -->
+	<jsp:include page="../memberMain/member_Footer.jsp" />
+	
+	<!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="../js/scripts.js"></script>
 </body>
 </html>

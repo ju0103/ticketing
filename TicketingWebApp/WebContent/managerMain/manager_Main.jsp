@@ -102,6 +102,30 @@
 								</div>
 							</div>
 						</div>
+						
+						
+						<div class="col mb-5">
+							<div class="card h-100">
+								<div class="card-body p-4">
+									<div class="text-center">
+										<h5 class="fw-bolder">공지사항 관리</h5>
+									</div>
+								</div>
+								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+									<div class="text-center">
+										<a class="text-decoration-none" href="../manager/manager_LoginForm.jsp">공지사항 등록</a>
+									</div>
+								</div>
+								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+									<div class="text-center">
+										<a class="text-decoration-none" href="../manager/manager_LoginForm.jsp">공지사항 수정</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						
+						
 					</div>
 				</div>
 			</session>
@@ -194,6 +218,26 @@
 								</div>
 							</div>
 						</div>
+						<div class="col mb-5">
+							<div class="card h-100">
+								<div class="card-body p-4">
+									<div class="text-center">
+										<h5 class="fw-bolder">공지사항 관리</h5>
+									</div>
+								</div>
+								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+									<div class="text-center">
+										<a class="text-decoration-none" href="../notice/notice_Write.jsp">공지사항 등록</a>
+									</div>
+								</div>
+								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+									<div class="text-center">
+										<a class="text-decoration-none" href="../notice/notice_List.jsp">공지사항 목록</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						
 					</div>
 				</div>
 			</session>

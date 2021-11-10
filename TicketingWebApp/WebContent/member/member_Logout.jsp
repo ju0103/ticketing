@@ -2,5 +2,5 @@
     pageEncoding="EUC-KR"%>
 <%
 	session.invalidate();
-	response.sendRedirect("../memberMain/index.jsp");
+	response.sendRedirect("../memberMain/member_Main.jsp");
 %>
