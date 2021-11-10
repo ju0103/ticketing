@@ -48,9 +48,9 @@ public class ReviewDBBean {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, p_code);
 			pstmt.setInt(2, number);
-			pstmt.setString(3, HanConv.toKorean(review.getReview_name()));
-			pstmt.setString(4, HanConv.toKorean(review.getReview_title()));
-			pstmt.setString(5, HanConv.toKorean(review.getReview_content()));
+			pstmt.setString(3, review.getReview_name());
+			pstmt.setString(4, review.getReview_title());
+			pstmt.setString(5, review.getReview_content());
 			pstmt.setTimestamp(6, review.getReview_date());
 			pstmt.setString(7, review.getReview_pwd());
 			pstmt.setString(8, review.getReview_ip());
