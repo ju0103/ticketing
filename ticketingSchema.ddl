@@ -207,7 +207,28 @@ ALTER TABLE ticketing.review
     ADD CONSTRAINT review_performance_fk FOREIGN KEY ( performance_p_code )
         REFERENCES ticketing.performance ( p_code )
     NOT DEFERRABLE;
+    
+    
 
+ALTER TABLE ticketing.notice
+ADD CONSTRAINT reservation_performance_fk FOREIGN KEY ( performance_p_code )
+    REFERENCES ticketing.performance ( p_code )
+NOT DEFERRABLE;
+
+
+CREATE TABLE ticketing.review
+(P_CODE    NUMBER(7) NOT NULL,
+ R_ID      NUMBER(7) NOT NULL,
+ R_NAME    VARCHAR2(20),
+ R_TITLE   VARCHAR2(30) ,
+ R_CONTENT VARCHAR2(2000),
+ R_DATE    TIMESTAMP(6),
+ R_PWD     VARCHAR2(20),
+ R_IP      VARCHAR2(30),
+ R_FNAME   VARCHAR2(100),
+ R_FSIZE   NUMBER(10),
+ R_RFNAME  VARCHAR2(100)
+);
 
 
 -- Oracle SQL Developer Data Modeler 요약 보고서: 
