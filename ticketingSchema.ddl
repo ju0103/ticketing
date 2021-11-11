@@ -1,21 +1,22 @@
 -- 생성자 Oracle SQL Developer Data Modeler 21.2.0.165.1515
---   위치:        2021-11-10 17:02:03 KST
+--   위치:        2021-11-11 12:24:07 KST
 --   사이트:      Oracle Database 11g
 --   유형:      Oracle Database 11g
 
 
 
-CREATE USER ticketing IDENTIFIED BY ACCOUNT UNLOCK ;
+-- CREATE USER ticketing IDENTIFIED BY ACCOUNT UNLOCK ;
 
 -- predefined type, no DDL - MDSYS.SDO_GEOMETRY
 
 -- predefined type, no DDL - XMLTYPE
 
 CREATE TABLE ticketing.faq (
-    faq_code   NUMBER(5) NOT NULL,
-    faq_type   VARCHAR2(20 BYTE),
-    faq_quest  VARCHAR2(50 BYTE),
-    faq_answer VARCHAR2(1000 BYTE)
+    faq_code           NUMBER(5) NOT NULL,
+    faq_type           VARCHAR2(20 BYTE),
+    faq_quest          VARCHAR2(50 BYTE),
+    faq_answer         VARCHAR2(1000 BYTE),
+    manager_manager_id VARCHAR2(20 BYTE)
 )
 PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
     STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
@@ -155,10 +156,19 @@ ALTER TABLE ticketing.performance
         USING INDEX ticketing.performance_pk;
 
 CREATE TABLE ticketing.qna (
-    performance_p_code NUMBER(7) NOT NULL
+    performance_p_code NUMBER(7) NOT NULL,
+    q_no               NUMBER(5) NOT NULL,
+    q_writer           VARCHAR2(30),
+    q_content          VARCHAR2(1000),
+    q_date             DATE,
+    q_ref              NUMBER(4),
+    q_step             NUMBER(4),
+    q_level            NUMBER(4)
 )
 PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
     STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
+
+ALTER TABLE ticketing.qna ADD CONSTRAINT qna_pk PRIMARY KEY ( q_no );
 
 CREATE TABLE ticketing.reservation (
     member_member_id   VARCHAR2(20 BYTE) NOT NULL,
@@ -185,7 +195,7 @@ ALTER TABLE ticketing.reservation
 
 CREATE TABLE ticketing.review (
     performance_p_code NUMBER(7) NOT NULL,
-    r_id               NUMBER(7),
+    r_id               NUMBER(7) NOT NULL,
     r_name             VARCHAR2(20 BYTE),
     r_title            VARCHAR2(30 BYTE),
     r_content          VARCHAR2(2000 BYTE),
@@ -198,6 +208,13 @@ CREATE TABLE ticketing.review (
 )
 PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
     STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
+
+ALTER TABLE ticketing.review ADD CONSTRAINT review_pk PRIMARY KEY ( r_id );
+
+ALTER TABLE ticketing.faq
+    ADD CONSTRAINT faq_manager_fk FOREIGN KEY ( manager_manager_id )
+        REFERENCES ticketing.manager ( manager_id )
+    NOT DEFERRABLE;
 
 ALTER TABLE ticketing.inquiry
     ADD CONSTRAINT inquiry_manager_fk FOREIGN KEY ( manager_manager_id )
@@ -235,7 +252,7 @@ ALTER TABLE ticketing.review
 -- 
 -- CREATE TABLE                             9
 -- CREATE INDEX                             6
--- ALTER TABLE                             12
+-- ALTER TABLE                             15
 -- CREATE VIEW                              0
 -- ALTER VIEW                               0
 -- CREATE PACKAGE                           0

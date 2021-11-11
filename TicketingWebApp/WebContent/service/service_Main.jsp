@@ -14,6 +14,7 @@
 	
 	<a href="../inquiry/member_inquiry_RegisterForm.jsp">1:1 문의 ></a>
 	<a href="../faq/member_faq_List.jsp?faq_type=100">FAQ</a>
+	<a href="../notice/member_notice_list.jsp">공지사항</a>
 	
 	<jsp:include page="../memberMain/member_Footer.jsp" />
 	

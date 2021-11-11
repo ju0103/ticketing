@@ -86,6 +86,9 @@
 									<button class="btn btn-primary btn-lg" onclick="location.href='../review/review_list.jsp?p_code=<%= p_code%>'">후기</button>
 								</td>
 								<td>
+									<button class="btn btn-primary btn-lg" onclick="location.href='../qna/qna_main.jsp?p_code=<%= p_code%>'">QnA</button>
+								</td>
+								<td>
 									<button class="btn btn-primary btn-lg" onclick="location.href='../reservation/reservation_check.jsp?p_code=<%= p_code%>'">예매하기</button>
 								</td>
 							</tr>
