@@ -7,9 +7,10 @@
 	int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 	String q_writer = request.getParameter("q_writer");
 	System.out.println("qna_delete.jsp/q_writer = "+q_writer);
+	String memberId = (String)session.getAttribute("member_id");
 	
 	QnADBBean db = QnADBBean.getInstance();
-	int re = db.deleteQnA(q_no, q_writer);
+	int re = db.deleteQnA(q_no, q_writer, memberId);
 	
 	if(re == 1){
 		System.out.println("delete_success");

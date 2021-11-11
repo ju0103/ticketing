@@ -212,14 +212,15 @@ private static QnADBBean instance = new QnADBBean();
 		}
 		return QnA;
 	}
-	public int deleteQnA(int q_no,String q_writer) throws Exception {
+	public int deleteQnA(int q_no,String q_writer,String mem_id) throws Exception {
 		//id와 pwd를 받아 삭제하는 메소드
 		Connection con = null;
 		PreparedStatement pstmt =null;
 		ResultSet rs = null;
 		String sql = "";
 		int re= -1; // 값을 리턴할 re
-		String writer =""; //비밀번호
+		System.out.println("DB/deleteQnA / 작성자 : "+q_writer);
+		System.out.println("DB/deleteQnA / 유저 : "+mem_id);
 		
 		try {
 			con = getConnection();
@@ -229,11 +230,11 @@ private static QnADBBean instance = new QnADBBean();
 			rs = pstmt.executeQuery();
 			System.out.println("DB : deleteQnA/q_no=" + q_no);
 			if(rs.next()) {
-				writer = rs.getString(1); 
+				q_writer = rs.getString(1); 
 				
-				if (!writer.equals(q_writer)) {//같지않다
+				if (!mem_id.equals(q_writer)) {//같지않다
 					re =0;
-					System.out.println("DB/writer = "+writer);
+					System.out.println("DB/mem_id = "+mem_id);
 					System.out.println("DB/q_writer = "+q_writer);
 					
 				}else {
