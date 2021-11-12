@@ -209,7 +209,7 @@ private static QnADBBean instance = new QnADBBean();
 		}
 		return QnA;
 	}
-	public int deleteQnA(int q_no,String q_writer,String mem_id) throws Exception {
+	public int deleteQnA(int q_no,String q_writer,String login_id) throws Exception {
 		//id와 pwd를 받아 삭제하는 메소드
 		Connection con = null;
 		PreparedStatement pstmt =null;
@@ -227,7 +227,7 @@ private static QnADBBean instance = new QnADBBean();
 			if(rs.next()) {
 				q_writer = rs.getString(1); 
 				
-				if (!mem_id.equals(q_writer)) {//같지않다
+				if (!login_id.equals(q_writer)) {//같지않다
 					re =0;
 					
 				}else {
@@ -254,7 +254,7 @@ private static QnADBBean instance = new QnADBBean();
 		}
 		return re;
 	}
-	public int editQnA(QnABean QnA,String mem_id) {
+	public int editQnA(QnABean QnA,String login_id) {
 		// QnA를 받아서 수정하는 메소드
 		
 		Connection con = null;
@@ -273,9 +273,9 @@ private static QnADBBean instance = new QnADBBean();
 			
 			if(rs.next()) {
 				writer = rs.getString(1);
-				if(mem_id==null){ //비회원
+				if(login_id==null){ //비회원
 					re = 2;
-				}else if(!writer.equals(mem_id)) {
+				}else if(!writer.equals(login_id)) {
 					re = 0; 
 				}else {
 					sql ="update QnA set q_content=? where q_no=?";

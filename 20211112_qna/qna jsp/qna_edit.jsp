@@ -13,11 +13,18 @@
 	QnABean qna = db.getQnA(p_code, q_no);
 	String q_writer = qna.getQ_writer();
 	String q_content = qna.getQ_content();
-	String log="";
+	String login_id="";
+	int log; // 관리자는 2, 회원은 1, 비회원은 0
+	
 	if(session.getAttribute("member_id")!=null){
-		log = (String)session.getAttribute("member_id");
+		login_id = (String)session.getAttribute("member_id");
+		log = 1;
 	}else{
-		log = (String)session.getAttribute("manager_id");
+		login_id = (String)session.getAttribute("manager_id");
+		log = 2;
+	}
+	if(login_id == null){ //로그인X
+		log = 0;
 	}
 			
 %>
@@ -42,7 +49,17 @@
 </head>
 <body>
 	<!-- navbar -->
-	<jsp:include page="../memberMain/member_Header.jsp" />
+<%
+	if(log == 2){
+%>
+		<jsp:include page="../managerMain/manager_Header.jsp" />
+<%
+	}else{
+%>
+		<jsp:include page="../memberMain/member_Header.jsp" />
+<%
+	}
+%>
 	<center>
 		<h1>수정하기</h1>
 		<br>
@@ -56,8 +73,8 @@
 					<td align="center">문의내용</td>
 					<td>
 <textarea cols="100" rows="2" name="q_content" 
-placeholder="* 게시된 글의 저작권은 글을 작성한 회원에게 있습니다. 
-* 게시물로 인해 발생하는 문제는 게시자 본인에게 책임이 있습니다."><%= q_content %></textarea>
+placeholder=" * 게시된 글의 저작권은 글을 작성한 회원에게 있습니다. 
+ * 게시물로 인해 발생하는 문제는 게시자 본인에게 책임이 있습니다."><%= q_content %></textarea>
 					</td>
 				</tr>
 				<tr><td colspan="2"><hr></td></tr>

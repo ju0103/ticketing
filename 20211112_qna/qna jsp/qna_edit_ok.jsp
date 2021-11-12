@@ -8,13 +8,13 @@
 	int p_code =  Integer.parseInt(request.getParameter("p_code"));
 	int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 	QnADBBean db = QnADBBean.getInstance();
-	String log="";
+	String login_id="";
 	if(session.getAttribute("member_id")!=null){
-		log = (String)session.getAttribute("member_id");
+		login_id = (String)session.getAttribute("member_id");
 	}else{
-		log = (String)session.getAttribute("manager_id");
+		login_id = (String)session.getAttribute("manager_id");
 	}
-	int re = db.editQnA(QnA,log);
+	int re = db.editQnA(QnA,login_id);
 	
 	if(re == 1){
 		System.out.println("qna_edit_ok.jsp :: success");

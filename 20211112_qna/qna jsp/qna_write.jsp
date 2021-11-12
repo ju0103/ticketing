@@ -8,11 +8,11 @@
 	int q_ref=1,q_step=0,q_level=0;
 	String q_content="";
 	
-	String log="";
+	String login_id="";
 	if(session.getAttribute("member_id")!=null){
-		log = (String)session.getAttribute("member_id");
+		login_id = (String)session.getAttribute("member_id");
 	}else{
-		log = (String)session.getAttribute("manager_id");
+		login_id = (String)session.getAttribute("manager_id");
 	}
 	
 	if(request.getParameter("q_no")!=null){
@@ -49,7 +49,7 @@
 			<input type="hidden" name="q_ref" value="<%=q_ref%>">
 			<input type="hidden" name="q_step" value="<%=q_step%>">
 			<input type="hidden" name="q_level" value="<%=q_level%>">
-			<input type="hidden" name="q_writer" value="<%=log%>">
+			<input type="hidden" name="q_writer" value="<%=login_id%>">
 			<table>
 				<tr>
 					<td>문의내용&nbsp;&nbsp;</td>
@@ -58,8 +58,8 @@
 						if(q_no == 0){
 					%>
 <textarea cols="100" rows="2" name="q_content" 
-placeholder="* 게시된 글의 저작권은 글을 작성한 회원에게 있습니다. 
-* 게시물로 인해 발생하는 문제는 게시자 본인에게 책임이 있습니다."></textarea>
+placeholder=" * 게시된 글의 저작권은 글을 작성한 회원에게 있습니다. 
+ * 게시물로 인해 발생하는 문제는 게시자 본인에게 책임이 있습니다."></textarea>
 					<%	
 						}else{
 					%>

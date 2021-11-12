@@ -4,11 +4,18 @@
     pageEncoding="EUC-KR"%>
 <%
 	int p_code=Integer.parseInt(request.getParameter("p_code"));
-	String log="";
+	String login_id="";
+	int log; // 관리자는 2, 회원은 1, 비회원은 0
+	
 	if(session.getAttribute("member_id")!=null){
-		log = (String)session.getAttribute("member_id");
+		login_id = (String)session.getAttribute("member_id");
+		log = 1;
 	}else{
-		log = (String)session.getAttribute("manager_id");
+		login_id = (String)session.getAttribute("manager_id");
+		log = 2;
+	}
+	if(login_id == null){ //로그인X
+		log = 0;
 	}
 	int q_no=0;
 	int q_ref=1,q_step=0,q_level=0;
@@ -48,7 +55,17 @@
 </head>
 <body>
 	<!-- navbar -->
-	<jsp:include page="../memberMain/member_Header.jsp" />
+<%
+	if(log == 2){
+%>
+		<jsp:include page="../managerMain/manager_Header.jsp" />
+<%
+	}else{
+%>
+		<jsp:include page="../memberMain/member_Header.jsp" />
+<%
+	}
+%>
 	<center>
 		<h1>답변하기</h1>
 		<br>
@@ -57,7 +74,7 @@
 			<input type="hidden" name="q_ref" value="<%=q_ref%>">
 			<input type="hidden" name="q_step" value="<%=q_step%>">
 			<input type="hidden" name="q_level" value="<%=q_level%>">
-			<input type="hidden" name="q_writer" value="<%= log %>">
+			<input type="hidden" name="q_writer" value="<%= login_id %>">
 			<table width="1000" border="1">
 				<tr height="100">
 					<td width="200" align="center">문의내용</td>
@@ -66,14 +83,14 @@
 				<tr><td colspan="2"><hr></td></tr>
 				<tr height="50">
 					<td align="center">답변인</td>
-					<td><%= log %></td>
+					<td><%= login_id %></td>
 				</tr>
 				<tr height="100">
 					<td align="center">답변내용</td>
 					<td>
 <textarea cols="100" rows="2" name="q_content" 
-placeholder="* 게시된 글의 저작권은 글을 작성한 회원에게 있습니다. 
-* 게시물로 인해 발생하는 문제는 게시자 본인에게 책임이 있습니다."></textarea>
+placeholder=" * 게시된 글의 저작권은 글을 작성한 회원에게 있습니다. 
+ * 게시물로 인해 발생하는 문제는 게시자 본인에게 책임이 있습니다."></textarea>
 					</td>
 				</tr>
 				<tr align="center" height="100">

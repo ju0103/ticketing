@@ -3,13 +3,20 @@
 
 <%
 	String p_code = request.getParameter("p_code");
-	int log;
+	String login_id="";
+	int log; // 관리자는 2, 회원은 1, 비회원은 0
 	
-	if(session.getAttribute("member_id")==null && session.getAttribute("manager_id")==null){ //로그인X
-		log = 0;
-	}else {//로그인ㅇ
+	if(session.getAttribute("member_id")!=null){
+		login_id = (String)session.getAttribute("member_id");
 		log = 1;
+	}else{
+		login_id = (String)session.getAttribute("manager_id");
+		log = 2;
 	}
+	if(login_id == null){ //로그인X
+		log = 0;
+	}
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -30,8 +37,17 @@
 </head>
 <body>
 	<!-- navbar -->
-	<jsp:include page="../memberMain/member_Header.jsp" />
-	
+<%
+	if(log == 2){
+%>
+		<jsp:include page="../managerMain/manager_Header.jsp" />
+<%
+	}else{
+%>
+		<jsp:include page="../memberMain/member_Header.jsp" />
+<%
+	}
+%>
 	<center>
 		<h4 style="margin-top: 25px; margin-bottom: 25px; color: #708090">
 			<p><b>Q&A 게시판은 여러분 모두 질문과 답변에 참여할 수 있는 공간입니다.</b></p>
