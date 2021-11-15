@@ -1,5 +1,5 @@
 -- 생성자 Oracle SQL Developer Data Modeler 21.2.0.165.1515
---   위치:        2021-11-11 12:24:07 KST
+--   위치:        2021-11-15 16:08:53 KST
 --   사이트:      Oracle Database 11g
 --   유형:      Oracle Database 11g
 
@@ -12,11 +12,10 @@
 -- predefined type, no DDL - XMLTYPE
 
 CREATE TABLE ticketing.faq (
-    faq_code           NUMBER(5) NOT NULL,
-    faq_type           VARCHAR2(20 BYTE),
-    faq_quest          VARCHAR2(50 BYTE),
-    faq_answer         VARCHAR2(1000 BYTE),
-    manager_manager_id VARCHAR2(20 BYTE)
+    faq_code   NUMBER(5) NOT NULL,
+    faq_type   VARCHAR2(20 BYTE),
+    faq_quest  VARCHAR2(100 BYTE),
+    faq_answer VARCHAR2(1000 BYTE)
 )
 PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
     STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
@@ -38,14 +37,15 @@ CREATE TABLE ticketing.inquiry (
     member_member_id   VARCHAR2(20 BYTE) NOT NULL,
     manager_manager_id VARCHAR2(20 BYTE),
     i_id               NUMBER(5) NOT NULL,
-    i_title            VARCHAR2(30 BYTE),
+    i_title            VARCHAR2(50 BYTE),
     i_type             VARCHAR2(20 BYTE),
     i_quest            VARCHAR2(1000 BYTE),
     i_ref              NUMBER(5),
     mem_regdate        DATE,
     admin_regdate      DATE,
     mem_ip             VARCHAR2(15 BYTE),
-    admin_ip           VARCHAR2(15 BYTE)
+    admin_ip           VARCHAR2(15 BYTE),
+    i_answer           VARCHAR2(1000 BYTE)
 )
 PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
     STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
@@ -109,12 +109,11 @@ ALTER TABLE ticketing.member
         USING INDEX ticketing.member_pk;
 
 CREATE TABLE ticketing.notice (
-    n_code      NUMBER(5),
-    n_title     VARCHAR2(20 BYTE),
-    userid      VARCHAR2(20 BYTE),
-    n_date      DATE,
-    n_content   VARCHAR2(1000 BYTE),
-    n_available NUMBER
+    n_code    NUMBER(5),
+    n_title   VARCHAR2(20 BYTE),
+    n_userid  VARCHAR2(20 BYTE),
+    n_date    DATE,
+    n_content VARCHAR2(1000 BYTE)
 )
 PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
     STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
@@ -122,10 +121,10 @@ PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
 CREATE TABLE ticketing.performance (
     p_code        NUMBER(7) NOT NULL,
     p_type        VARCHAR2(10 BYTE),
-    p_title       VARCHAR2(50 BYTE),
+    p_title       VARCHAR2(100 BYTE),
     p_area        VARCHAR2(100 BYTE),
     p_date        VARCHAR2(50 BYTE),
-    p_performer   VARCHAR2(50 BYTE),
+    p_performer   VARCHAR2(150 BYTE),
     p_price       NUMBER(7),
     p_seat        NUMBER(6),
     p_description VARCHAR2(2000 BYTE),
@@ -158,8 +157,8 @@ ALTER TABLE ticketing.performance
 CREATE TABLE ticketing.qna (
     performance_p_code NUMBER(7) NOT NULL,
     q_no               NUMBER(5) NOT NULL,
-    q_writer           VARCHAR2(30),
-    q_content          VARCHAR2(1000),
+    q_writer           VARCHAR2(30 BYTE),
+    q_content          VARCHAR2(1000 BYTE),
     q_date             DATE,
     q_ref              NUMBER(4),
     q_step             NUMBER(4),
@@ -167,8 +166,6 @@ CREATE TABLE ticketing.qna (
 )
 PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
     STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
-
-ALTER TABLE ticketing.qna ADD CONSTRAINT qna_pk PRIMARY KEY ( q_no );
 
 CREATE TABLE ticketing.reservation (
     member_member_id   VARCHAR2(20 BYTE) NOT NULL,
@@ -197,7 +194,7 @@ CREATE TABLE ticketing.review (
     performance_p_code NUMBER(7) NOT NULL,
     r_id               NUMBER(7) NOT NULL,
     r_name             VARCHAR2(20 BYTE),
-    r_title            VARCHAR2(30 BYTE),
+    r_title            VARCHAR2(70 BYTE),
     r_content          VARCHAR2(2000 BYTE),
     r_date             DATE,
     r_pwd              VARCHAR2(20 BYTE),
@@ -209,41 +206,53 @@ CREATE TABLE ticketing.review (
 PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
     STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
 
-ALTER TABLE ticketing.review ADD CONSTRAINT review_pk PRIMARY KEY ( r_id );
+CREATE UNIQUE INDEX ticketing.review_pk ON
+    ticketing.review (
+        r_id
+    ASC )
+        TABLESPACE users PCTFREE 10
+            STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
+            DEFAULT )
+        LOGGING;
 
-ALTER TABLE ticketing.faq
-    ADD CONSTRAINT faq_manager_fk FOREIGN KEY ( manager_manager_id )
-        REFERENCES ticketing.manager ( manager_id )
-    NOT DEFERRABLE;
+ALTER TABLE ticketing.review
+    ADD CONSTRAINT review_pk PRIMARY KEY ( r_id )
+        USING INDEX ticketing.review_pk;
 
 ALTER TABLE ticketing.inquiry
     ADD CONSTRAINT inquiry_manager_fk FOREIGN KEY ( manager_manager_id )
         REFERENCES ticketing.manager ( manager_id )
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE ticketing.inquiry
     ADD CONSTRAINT inquiry_member_fk FOREIGN KEY ( member_member_id )
         REFERENCES ticketing.member ( member_id )
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE ticketing.qna
     ADD CONSTRAINT qna_performance_fk FOREIGN KEY ( performance_p_code )
         REFERENCES ticketing.performance ( p_code )
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE ticketing.reservation
     ADD CONSTRAINT reservation_member_fk FOREIGN KEY ( member_member_id )
         REFERENCES ticketing.member ( member_id )
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE ticketing.reservation
     ADD CONSTRAINT reservation_performance_fk FOREIGN KEY ( performance_p_code )
         REFERENCES ticketing.performance ( p_code )
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE ticketing.review
     ADD CONSTRAINT review_performance_fk FOREIGN KEY ( performance_p_code )
         REFERENCES ticketing.performance ( p_code )
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 
@@ -251,8 +260,8 @@ ALTER TABLE ticketing.review
 -- Oracle SQL Developer Data Modeler 요약 보고서: 
 -- 
 -- CREATE TABLE                             9
--- CREATE INDEX                             6
--- ALTER TABLE                             15
+-- CREATE INDEX                             7
+-- ALTER TABLE                             13
 -- CREATE VIEW                              0
 -- ALTER VIEW                               0
 -- CREATE PACKAGE                           0
