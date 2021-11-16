@@ -26,7 +26,7 @@ public class QnABean {
 		}
 		for(int i= startPage; i<(startPage+limit); i++) { 
 			if(i == pageNum) {
-				str+="["+i+"]&nbsp;&nbsp;";
+				str+="<b>["+i+"]</b>&nbsp;&nbsp;";
 			}else {
 				str+="<a href='qna_main.jsp?p_code="+p_code+"&pageNum="+i+"'>["+i+"]</a>&nbsp;&nbsp;"; 
 			}

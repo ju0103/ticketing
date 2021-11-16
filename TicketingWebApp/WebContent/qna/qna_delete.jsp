@@ -7,13 +7,19 @@
 	int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 	String q_writer = request.getParameter("q_writer");
 	System.out.println("qna_delete.jsp/q_writer = "+q_writer);
-	String memberId = (String)session.getAttribute("member_id");
+	
+	String login_id="";
+	if(session.getAttribute("member_id")!=null){
+		login_id = (String)session.getAttribute("member_id");
+	}else{
+		login_id = (String)session.getAttribute("manager_id");
+	}
 	
 	QnADBBean db = QnADBBean.getInstance();
-	int re = db.deleteQnA(q_no, q_writer, memberId);
+	int re = db.deleteQnA(q_no, q_writer, login_id);
 	
 	if(re == 1){
-		System.out.println("delete_success");
+		System.out.println("qna_delete.jsp :: success");
 		response.sendRedirect("qna_main.jsp?p_code="+p_code);
 	}else if(re == 0){
 %>

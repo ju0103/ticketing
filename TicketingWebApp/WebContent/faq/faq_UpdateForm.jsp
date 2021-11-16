@@ -2,7 +2,7 @@
 <%@page import="ticketing.faq.FaqDBBean"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%	
+<%
 	int faq_code = Integer.parseInt(request.getParameter("faq_code"));
 	FaqDBBean db = FaqDBBean.getInstance();
 	FaqBean faq = db.getFaq(faq_code);

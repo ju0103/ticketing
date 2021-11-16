@@ -12,9 +12,18 @@
 <body>
 	<jsp:include page="../memberMain/member_Header.jsp" />
 	
-	<a href="../inquiry/member_inquiry_RegisterForm.jsp">1:1 문의 ></a>
-	<a href="../faq/member_faq_List.jsp?faq_type=100">FAQ</a>
-	<a href="../notice/member_notice_list.jsp">공지사항</a>
+	<div class="container m-3 px-1 col-lg-1">
+		<ul class="list-group">
+			<li class="list-group-item">
+				<a href="../inquiry/member_inquiry_RegisterForm.jsp">1:1 문의 ></a>				
+			</li>
+			<li class="list-group-item">
+				<a href="../faq/member_faq_List.jsp?faq_type=100">FAQ</a>
+			</li>
+		</ul>
+	</div>
+	
+	<jsp:include page="../notice/notice_MemberList.jsp" />
 	
 	<jsp:include page="../memberMain/member_Footer.jsp" />
 	

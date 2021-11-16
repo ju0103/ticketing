@@ -1,6 +1,6 @@
 <%@page import="ticketing.review.ReviewDBBean"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=euc-kr"
+    pageEncoding="euc-kr"%>
 <jsp:useBean id="board" class="ticketing.review.ReviewBean"></jsp:useBean>
 <jsp:setProperty property="*" name="board"/>
 <%
@@ -10,6 +10,8 @@
 	String r_title = request.getParameter("r_title");
 	String r_content = request.getParameter("r_content");
 	
+	System.out.println("review edit >>" + r_title);
+	System.out.println("review edit >>" + r_content);
 	board.setPerform_code(p_code);
 	board.setReview_id(r_id);
 	board.setReview_pwd(r_pwd);
@@ -20,18 +22,18 @@
 	int re = db.editBoard(board);
 	
 	if(re == 1){
-		response.sendRedirect("review_list.jsp");
+		response.sendRedirect("review_list.jsp?p_code=" + p_code);
 	} else if(re == 0){
 		%>
 			<script type="text/javascript">
-				alert("ë¹„ë°€ë²ˆí˜¸ê°€ ë§žì§€ ì•ŠìŠµë‹ˆë‹¤.");
+				alert("ºñ¹Ð¹øÈ£°¡ ¸ÂÁö ¾Ê½À´Ï´Ù.");
 				history.go(-1);
 			</script>
 		<%
 	} else if(re == -1){
 		%>
 			<script type="text/javascript">
-				alert("ìˆ˜ì •ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+				alert("¼öÁ¤¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù.");
 				history.go(-1);
 			</script>
 		<%

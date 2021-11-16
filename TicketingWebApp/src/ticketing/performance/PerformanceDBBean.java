@@ -149,6 +149,60 @@ private static PerformanceDBBean instance=new PerformanceDBBean();
 		return performanceList;
 	}
 	
+	// perforListByType
+	public ArrayList<PerformanceBean> perforListByType(String pType){
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<PerformanceBean> performanceList = new ArrayList<PerformanceBean>();
+		
+		try {
+			conn = getConnection();
+			String sql="select * from performance where p_type = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pType);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				PerformanceBean board=new PerformanceBean();
+				board.setP_code(rs.getInt(1));
+				board.setP_type(rs.getString(2));
+				board.setP_title(rs.getString(3));
+				board.setP_area(rs.getString(4));
+				board.setP_date(rs.getString(5));
+				board.setP_performer(rs.getString(6));
+				board.setP_price(rs.getInt(7));
+				board.setP_seat(rs.getInt(8));
+				board.setP_description(rs.getString(9));
+				board.setP_regdate(rs.getTimestamp(10));
+				board.setP_rating(rs.getInt(11));
+				board.setP_fname(rs.getString(12));
+				board.setP_fsize(rs.getInt(13));
+				board.setP_rfname(rs.getString(14));
+				board.setP_ref(rs.getInt(15));
+				board.setP_step(rs.getInt(16));
+				board.setP_level(rs.getInt(17));
+				board.setP_time(rs.getInt(18));
+				
+				performanceList.add(board);
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return performanceList;
+	}
+	
 	public PerformanceBean getPerformance(String p_code){
 		Connection conn=null;
 		PreparedStatement pstmt=null;

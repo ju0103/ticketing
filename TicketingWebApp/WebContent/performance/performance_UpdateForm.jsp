@@ -95,23 +95,23 @@
 			</div>  
 			<div class="mb-3">
 				<label class="form-label" for="title">공연명</label>
-				<input class="form-control" id="p_title" name="p_title" type="text" placeholder="공연명">
+				<input class="form-control" id="p_title" name="p_title" type="text" placeholder="공연명" value="<%= p_title %>">
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="performer">출연진</label>
-				<input class="form-control" id="p_performer" name="p_performer" type="text" placeholder="출연진">
+				<input class="form-control" id="p_performer" name="p_performer" type="text" placeholder="출연진" value="<%= p_performer %>">
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="area">장소</label><br>
 				<input  type="text" id="sample6_postcode" placeholder="우편번호">
 				<input  type="button" onclick="addressPopup()" value="우편번호 찾기"><br>
-				<input  type="text" id="sample6_address" size="50" placeholder="주소" name="p_area"><br>
+				<input  type="text" id="sample6_address" size="50" placeholder="주소" name="p_area" value="<%= p_area %>"><br>
 				<input  type="text" id="sample6_detailAddress" size="20" placeholder="<%=p_area %>" name="p_detailarea">
 				<input  type="text" id="sample6_extraAddress" size="30" placeholder="참고항목">
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="date">공연일시</label>
-				<input class="form-control" id="p_date" name="p_date" type="datetime-local">
+				<input class="form-control" id="p_date" name="p_date" type="datetime-local" value="<%= p_date %>">
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="time">공연시간</label>
@@ -131,7 +131,7 @@
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="description">공연 설명</label>
-				<textarea class="form-control" id="p_description" name="p_description" rows="10" cols="65" placeholder="<%= p_description%>"></textarea>
+				<textarea class="form-control" id="p_description" name="p_description" rows="10" cols="65" placeholder="<%= p_description%>"><%= p_description %></textarea>
 			</div>
 			<div class="mb-3">
 				<label class="form-label">암호</label>

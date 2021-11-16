@@ -21,35 +21,45 @@
 	<jsp:include page="../memberMain/member_Header.jsp" />
 	
 	<!-- member update form -->
-	<div class="container py-4">
-		<div class="text-center mb-5">
-			<h2 class="fw-bolder">회원 정보 수정</h2>
-		</div>
-		<form id="contactForm" method="post" action="./member_UpdateOk.jsp">
-			<div class="mb-3">
-				<label class="form-label" for="id">아이디</label>
-				<p><%= member.getMember_id() %></p>
-			</div>
-			<div class="mb-3">
-				<label class="form-label" for="pwd">비밀번호</label>
-				<input class="form-control" id="member_pwd" name="member_pwd" type="password" placeholder="Passwowrd">
-			</div>
-			<div class="mb-3">
-				<label class="form-label" for="pwd">비밀번호 확인</label>
-				<input class="form-control" id="check_pwd" name="check_pwd" type="password" placeholder="Passwowrd">
-			</div>
-			<div class="mb-3">
-				<label class="form-label" for="name">이름</label>
-				<p><%= member.getMember_name() %></p>
-			</div>
-			<div class="mb-3">
-				<label class="form-label" for="email">이메일</label>
-				<input class="form-control" id="member_email" name="member_email" type="email" placeholder="Email Address">
-			</div>
-			<div class="d-grid">
-				<button class="btn btn-primary btn-lg" type="submit">정보 수정</button>
-			</div>
-		</form>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-9 col-md-9 col-lg-7 mx-auto">
+				<div class="card border-1 rounded-3 my-5">
+					<div class="card-body p-4 p-sm-5">
+						<h5 class="card-title text-center mb-5 fw-light fs-5">회원 정보 수정</h5>
+						<form id="contactForm" method="post" action="./member_UpdateOk.jsp">
+							<div class="mb-3">
+								<label class="form-label" for="id">아이디</label>
+								<p><%= member.getMember_id() %></p>
+							</div>
+							<div class="mb-3">
+								<label class="form-label" for="name">이름</label>
+								<p><%= member.getMember_name() %></p>
+							</div>
+							<div class="mb-3">
+								<label class="form-label" for="pwd">비밀번호</label>
+								<input class="form-control" id="member_pwd" name="member_pwd" type="password" placeholder="Passwowrd">
+							</div>
+							<div class="mb-3">
+								<label class="form-label" for="pwd">비밀번호 확인</label>
+								<input class="form-control" id="check_pwd" name="check_pwd" type="password" placeholder="Passwowrd">
+							</div>
+							<div class="mb-3">
+								<label class="form-label" for="email">이메일</label>
+								<input class="form-control" id="member_email" name="member_email" type="email" placeholder="Email Address">
+							</div>
+							<div class="d-grid">
+								<button class="btn btn-primary btn-lg" type="submit">정보 수정</button>
+							</div>
+							<hr class="my-4">
+							<div class="d-grid">
+								<a href="../member/member_DeleteForm.jsp">탈퇴하기</a>
+		              		</div>
+						</form>
+	            	</div>
+	        	</div>
+	      	</div>
+	    </div>
 	</div>
 	
 	<!-- footer -->

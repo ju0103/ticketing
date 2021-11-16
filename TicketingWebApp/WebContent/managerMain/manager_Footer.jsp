@@ -10,12 +10,12 @@
     <link href="./css/styles.css" rel="stylesheet" />
 </head>
 <body>
-	<footer class="py-5 bg-dark fixed-bottom">
-		<div class="container">
+	<footer class="bg-dark fixed-bottom">
+		<div class="container py-4">
 			<p class="m-0 text-center text-white">°ü¸®ÀÚ</p>
-			<p class="m-0 text-center text-white">Copyright &copy; TICKETING 2021</p>
 		</div>
 	</footer>
+	
 	<!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->

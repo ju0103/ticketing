@@ -9,6 +9,36 @@ public class ReservationBean {
 	private Timestamp reserve_date;
 	private String reserve_seat;
 	
+	public static int pageSize = 8;
+	public static int pageCount = 1;
+	public static int pageNum = 1;
+	
+	public static String pageNumber(int limit) {
+		String str = "";
+		int temp = (pageNum - 1) % limit;
+		int startPage = pageNum - temp;
+		
+		if ((startPage - limit) > 0) {
+			str = "<a href='member_ReservationMGRForm.jsp?pageNum="+(startPage-1)+"'>[이전]</a>&nbsp;&nbsp;";
+		}
+		
+		for (int i = startPage; i < (startPage+limit); i++) {
+			if (i == pageNum) {
+				str += "["+i+"]&nbsp;&nbsp;";
+			}else {
+				str += "<a href='member_ReservationMGRForm.jsp?pageNum="+i+"'>["+i+"]</a>&nbsp;&nbsp;";
+			}
+			if (i >= pageCount) {
+				break;
+			}
+		}
+		
+		if ((startPage + limit) <= pageCount) {
+			str += "<a href='member_ReservationMGRForm.jsp?pageNum="+(startPage+limit)+"'>[다음]</a>&nbsp;&nbsp;";
+		}
+		return str;
+	}
+	
 	public String getMember_member_id() {
 		return member_member_id;
 	}

@@ -1,3 +1,4 @@
+<%@page import="myUtil.HanConv"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
@@ -16,6 +17,7 @@
 		String member_id = request.getParameter("member_id");
 		String i_id = request.getParameter("i_id");
 		String i_title = request.getParameter("i_title");
+		String i_quest = request.getParameter("i_quest");
 		String i_type = request.getParameter("i_type");
 		String manager_id = (String)session.getAttribute("manager_id");
 		
@@ -31,11 +33,11 @@
 					<input type="hidden" name="i_type" value="<%= i_type %>">
 					<div class="mb-3">
 						<label class="form-label" for="i_title">제목</label>
-						<input class="form-control" id="i_title" type="text" name="i_title" value="[답변]: <%= i_title %>">
+						<input class="form-control" id="i_title" type="text" name="i_title" value="[답변]: ">
 					</div>
 					<div class="mb-3">
-						<label class="form-label" for="faq_answer">답변</label>
-						<textarea class="form-control" id="i_content" cols="100" rows="10" name="i_content"></textarea>
+						<label class="form-label" for="i_answer">답변</label>
+						<textarea class="form-control" id="i_answer" cols="100" rows="10" name="i_answer"></textarea>
 					</div>
 					<div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
 						<button class="btn btn-outline-primary btn-sm px-4" type="submit">등록</button><br>

@@ -9,11 +9,72 @@ public class InquiryBean {
 	private String i_title;
 	private String i_type;
 	private String i_quest;
+	private String i_answer;
 	private String mem_ip;
 	private String admin_ip;
 	private int i_ref;
 	private Timestamp mem_regdate;
 	private Timestamp admin_regdate;
+	
+	public static int pageSize=5;
+	public static int pageCount=1;
+	public static int pageNum=1;
+	
+	public static String memberPageNumber(int limit) {
+		String str="";
+		int temp = (pageNum - 1) % limit;
+		int startPage = pageNum - temp;
+		
+		
+		if ((startPage - limit) > 0) {
+			str = "<a href='member_inquiry_List.jsp?pageNum="+(startPage-1)+"'>[이전]</a>&nbsp;&nbsp;";
+		}
+		
+		for (int i = startPage; i < (startPage + limit); i++) {
+			if (i == pageNum) {
+				str += "["+i+"]&nbsp;&nbsp;";
+			}else {
+				str += "<a href='member_inquiry_List.jsp?pageNum="+i+"'>["+i+"]</a>&nbsp;&nbsp;";
+			}
+			if (i >= pageCount) {
+				break;
+			}
+		}
+		
+		if ((startPage + limit) <= pageCount) {
+			str += "<a href='member_inquiry_List.jsp?pageNum="+(startPage+limit)+"'>[다음]</a>&nbsp;&nbsp;";
+		}
+		
+		return str;
+	}
+	
+	public static String managerPageNumber(int limit) {
+		String str="";
+		int temp = (pageNum - 1) % limit;
+		int startPage = pageNum - temp;
+		
+		
+		if ((startPage - limit) > 0) {
+			str = "<a href='manager_inquiry_List.jsp.jsp?pageNum="+(startPage-1)+"'>[이전]</a>&nbsp;&nbsp;";
+		}
+		
+		for (int i = startPage; i < (startPage + limit); i++) {
+			if (i == pageNum) {
+				str += "["+i+"]&nbsp;&nbsp;";
+			}else {
+				str += "<a href='manager_inquiry_List.jsp.jsp?pageNum="+i+"'>["+i+"]</a>&nbsp;&nbsp;";
+			}
+			if (i >= pageCount) {
+				break;
+			}
+		}
+		
+		if ((startPage + limit) <= pageCount) {
+			str += "<a href='manager_inquiry_List.jsp.jsp?pageNum="+(startPage+limit)+"'>[다음]</a>&nbsp;&nbsp;";
+		}
+		
+		return str;
+	}
 	
 	public String getMember_id() {
 		return member_id;
@@ -50,6 +111,12 @@ public class InquiryBean {
 	}
 	public void setI_quest(String i_quest) {
 		this.i_quest = i_quest;
+	}
+	public String getI_answer() {
+		return i_answer;
+	}
+	public void setI_answer(String i_answer) {
+		this.i_answer = i_answer;
 	}
 	public String getMem_ip() {
 		return mem_ip;

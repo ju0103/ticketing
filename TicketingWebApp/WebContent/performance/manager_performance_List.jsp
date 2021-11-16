@@ -29,76 +29,87 @@
 	<%
 		if (session.getAttribute("manager_id") != null) {
 	%>
-			<jsp:include page="../managerMain/manager_Header.jsp" />	
-			<center>
-			<table  class="table table-striped table-bordered table-hover" >
-					<tr height="25">
-						<td width="100"  align="center">포스터</td>
-						<td width="40" align="center">등록번호</td>
-						<td width="300" align="center">콘서트 제목</td>
-						<td width="120" align="center">출연진</td>
-						<td width="130" align="center">파일이름</td>
-						<td width="130" align="center">공연등록일</td>
-						<td width="130" align="center">공연장소</td>
-						<td width="130" align="center">공연일시</td>
-					</tr>	
-					
-				<%
-						for(int i=0; i<perforList.size(); i++){
-							PerformanceBean board = perforList.get(i);
-							p_code = board.getP_code();
-						 	p_title = board.getP_title();
-							p_performer = board.getP_performer();
-							p_rfname = board.getP_rfname();
-							p_regdate = board.getP_regdate();
-							p_fname = board.getP_fname();
-							p_area = board.getP_area();
-							p_date = board.getP_date();
-					%>
-							<tr height="25">
-								<td align="center">
-								<%
-									if(p_rfname != null){
-										%>
-									<img src="../upload/<%=p_fname %>" width="50" height="50">
-										<%
-									} else{
-										%>
-										<a href="perfor_UpdateForm.jsp?p_code=<%=p_code%>">포스터 등록</a>
-										<%
-									}
+			<jsp:include page="../managerMain/manager_Header.jsp" />
+			
+			<section class="py-5">
+			
+				<div class="container px-4 px-lg-5 mt-5">
+					<div class="row">
+						<table  class="table table-striped table-bordered table-hover" >
+								<tr height="25">
+									<td width="100"  align="center">포스터</td>
+									<td width="40" align="center">등록번호</td>
+									<td width="300" align="center">콘서트 제목</td>
+									<td width="120" align="center">출연진</td>
+									<td width="130" align="center">파일이름</td>
+									<td width="130" align="center">공연등록일</td>
+									<td width="130" align="center">공연장소</td>
+									<td width="130" align="center">공연일시</td>
+								</tr>	
+								
+							<%
+									for(int i=0; i<perforList.size(); i++){
+										PerformanceBean board = perforList.get(i);
+										p_code = board.getP_code();
+									 	p_title = board.getP_title();
+										p_performer = board.getP_performer();
+										p_rfname = board.getP_rfname();
+										p_regdate = board.getP_regdate();
+										p_fname = board.getP_fname();
+										p_area = board.getP_area();
+										p_date = board.getP_date();
 								%>
-								</td>
-									<td align="center">
-										<%= p_code %>
-									</td>
-									<td>
-										<a href="performance_View.jsp?p_code=<%= p_code %>"><%= p_title %></a>
-										
-									</td>
-									<td align="center">
-										<%= p_performer %>
-									</td>
-									<td align="center">
-										<%= p_rfname %>
-									</td>
-									<td align="center">
-										<%= sdf.format(p_regdate) %>
-									</td>
-									<td>
-										<%= p_area %>
-									</td>
-									<td align="center">
-										<%= p_date %>
-									</td>
-								</tr>
-									<%
-						}
-					%>
-					
-				</table>
-				<input class="btn btn-primary" type="button" value="등록" onclick="location.href='performance_RegisterForm.jsp'">
-			</center>
+										<tr height="25">
+											<td align="center">
+											<%
+												if(p_rfname != null){
+													%>
+												<img src="../upload/<%=p_fname %>" width="50" height="50">
+													<%
+												} else{
+													%>
+													<a href="perfor_UpdateForm.jsp?p_code=<%=p_code%>">포스터 등록</a>
+													<%
+												}
+											%>
+											</td>
+												<td align="center">
+													<%= p_code %>
+												</td>
+												<td>
+													<a href="performance_View.jsp?p_code=<%= p_code %>"><%= p_title %></a>
+													
+												</td>
+												<td align="center">
+													<%= p_performer %>
+												</td>
+												<td align="center">
+													<%= p_rfname %>
+												</td>
+												<td align="center">
+													<%= sdf.format(p_regdate) %>
+												</td>
+												<td>
+													<%= p_area %>
+												</td>
+												<td align="center">
+													<%= p_date %>
+												</td>
+										</tr>
+							<%
+								}
+							%>
+						</table>
+						<table>
+							<tr>
+								<td><input class="btn btn-primary" type="button" value="등록" onclick="location.href='performance_RegisterForm.jsp'"></td>
+							</tr>
+						</table>
+						<div class="py-5">
+						</div>
+					</div>
+				</div>
+			</section>
 	<%
 		}
 	%>

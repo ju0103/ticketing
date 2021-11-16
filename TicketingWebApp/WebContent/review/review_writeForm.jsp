@@ -42,55 +42,47 @@
 	<link href="../css/styles.css" rel="stylesheet" />
 </head>
 <body>
-	<center>
-		<h2><b>글 쓰 기</h2>
+	<jsp:include page="../memberMain/member_Header.jsp" />
+	
+	<div class="container py-5">
+		<div class="text-center mb-5">
+			<h2 class="fw-bolder">후기 등록</h2>
+		</div>
 		<form name="form" method="post" action="review_writeOk.jsp" enctype="multipart/form-data">
 			<input type="hidden" name="r_id" value="<%= r_id %>">
 			<input type="hidden" name="p_code" value="<%= p_code %>">
-			<table>
-				<tr height="30">
-					<td width="80">
-						작성자
-					</td>
-					<td width="80">
-						<input name="r_name" type="text" value="<%= r_name %>" readonly="readonly">
-					</td>
-				</tr>
-				<tr height="30">
-					<td width="80">
-						제목
-					</td>
-					<td colspan="2">
-						<input name="r_title" type="text" size="50">
-					</td>
-				</tr>
-				<tr height="30">
-					<td width="80">첨부파일</td>
-					<td colspan="3">
-						<input type="file" name="r_fname" size="40">
-					</td>
-				</tr>
-				<tr>
-					<td colspan="4">
-						<textarea name="r_content" rows="10" cols="65"></textarea>
-					</td>
-				</tr>
-				<tr>
-					<td width="80">
-						비밀번호
-					</td>
-					<td colspan="3">
-						<input name="r_pwd" type="password" size="12" maxlength="12">
-					</td>
-				</tr>
-				<tr height="50" align="center">
-					<td colspan="3">
-						<input type="submit" value="작성">&nbsp;
-						<input type="button" value="목록" onclick="location.href='review_list.jsp?pageNum=<%=pageNum %>'">
-					</td>
-				</tr>
-			</table>
+			<div class="mb-3">
+				<label class="form-label" for="r_name">작성자</label>
+				<input id="r_name" name="r_name" type="text" value="<%= r_name %>" readonly="readonly">
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="r_title">제목</label>
+				<input name="r_title" type="text" size="50">
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="r_fname">첨부파일</label>
+				<input type="file" name="r_fname" size="40">
+			</div>
+			<div class="mb-3">
+				<textarea name="r_content" rows="10" cols="65"></textarea>
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="r_pwd">비밀번호</label>
+				<input name="r_pwd" type="password" size="12" maxlength="12">
+			</div>
+			<div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
+				<button class="btn btn-outline-primary btn-sm px-4" type="submit">작성</button><br>
+				<!-- <input type="button" class="btn btn-outline-secondary btn-sm px-4 me-sm-3" value="목록" onclick="location.href='review_list.jsp?pageNum=<%=pageNum %>'"> -->
+			</div>
 		</form>
-	</center>
+	</div>
+	
+	<!-- footer -->
+	<jsp:include page="../memberMain/member_Footer.jsp" />
+	
+	<!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="../js/scripts.js"></script>
 </body>
 </html>

@@ -20,7 +20,7 @@
 			File file = new File(up + board.getReview_fname());
 			file.delete();
 		}
-		response.sendRedirect("review_list.jsp");
+		response.sendRedirect("review_list.jsp?p_code=" + p_code);
 	}else if(re == 0){
 		%>
 			<script type="text/javascript">

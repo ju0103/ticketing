@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="myUtil.AscendingString"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.ArrayList"%>
@@ -40,6 +41,7 @@
     int p_time = performance.getP_time();
     
     Timestamp p_regdate = performance.getP_regdate();
+    String p_formattedDate = p_date.substring(0, 10) + " " + p_date.substring(12);
 
     // 예매 완료된 좌석 불러오기
     ReservationDBBean rdb = ReservationDBBean.getInstance();
@@ -57,13 +59,10 @@
 <html>
 <head>
 	<meta charset="EUC-KR">
-	<title>Insert title here</title>
-	<style>
-		table input[type="checkbox"] {
-			border: 1px solid red;
-			background-color: black;
-		}
-	</style>
+	<meta name="viewport" content="width=deivce-width, initial-scale=1">
+	<title>좌석 선택</title>
+	<!-- CSS -->
+    <link href="../css/styles.css" rel="stylesheet" />
 	<script>
 	function reservation() {
 		var form = document.forms[0];
@@ -84,58 +83,87 @@
 	</script>
 </head>
 <body>
-	<form method="post" action="reservation_pay.jsp">
-		<input type="hidden" name="p_code" value="<%= p_code %>">
-		<input type="hidden" name="p_price" value="<%= p_price %>">
-		<table width="<%= width %>">
-			<tr>
-				<td colspan="12" align="center" bgcolor="#ccc">screen</td>
-			</tr>
-		</table>
-		<table width="<%= width %>">
-			<%
-				String str, colN = "", rowN = "";
-				String[] cols = new String[seatList.size()];
-				String[] rows = new String[seatList.size()];
-				int flag = -1;
-				
-				for (int i = 0; i < seatList.size(); i++) {
-					String seatNum = seatList.get(i);
-					cols[i] = seatNum.substring(0, 1);
-					rows[i] = seatNum.substring(1);
-				}
-				
-				for (char i = 'A'; i <= 'J'; i++) {
-					out.println("<tr>");
-					out.println("<td align='center'>" + i + "</td>");
-					
-					for (int k = 0; k < cols.length; k++) {
-						if (cols[k].equals(Character.toString(i))) flag = k;
-					}
-					for (int j = 1; j <= col; j++) {
-						if (j != 1 && j % 5 == 1) {
-							out.println("<td>&nbsp;</td>");
-						}
-						out.println("<td align='center'>");
-						str = String.valueOf(i) + j;
-						
-						if (flag != -1 && Integer.parseInt(rows[flag]) == j) {
-							out.println("<input type='checkbox' name='seat' value='" + str + "' disabled='disabled'>");
-							flag = -1;
-						} else {
-							out.println("<input type='checkbox' name='seat' value='" + str + "'>");														
-						}
-						out.println("</td>");
-					}
-					out.println("</tr>");
-				}
-			%>
-			<tr>
-				<td colspan="12">
-					<input type="button" value="결제하기" onclick="reservation();">
-				</td>
-			</tr>
-		</table>
-	</form>
+	<!-- navbar -->
+	<jsp:include page="../memberMain/member_Header.jsp" />
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-9 col-md-9 col-lg-7 mx-auto">
+				<div class="card border-0 shadow rounded-3 my-5">
+					<div class="card-header">
+						<b><%= p_title %></b><br />
+						시간: <%= p_formattedDate %><br />
+						장소: <%= p_area %><br />
+					</div>
+					<div class="card-body p-4 p-sm-5">
+						<h5 class="card-title text-center mb-5 fw-light fs-5">좌석 선택</h5>
+						<form method="post" action="reservation_pay.jsp">
+							<input type="hidden" name="p_code" value="<%= p_code %>">
+							<input type="hidden" name="p_price" value="<%= p_price %>">
+							<center>
+							<table width="<%= width %>">
+								<tr>
+									<td height="50" colspan="12" align="center" bgcolor="#ccc">무   대</td>
+								</tr>
+							</table>
+							<table width="<%= width %>">
+								<%
+									String str, colN = "", rowN = "";
+									String[] cols = new String[seatList.size()];
+									String[] rows = new String[seatList.size()];
+									int flag = -1;
+									
+									for (int i = 0; i < seatList.size(); i++) {
+										String seatNum = seatList.get(i);
+										cols[i] = seatNum.substring(0, 1);
+										rows[i] = seatNum.substring(1);
+									}
+									
+									for (char i = 'A'; i <= 'J'; i++) {
+										out.println("<tr>");
+										out.println("<td align='center'>" + i + "</td>");
+										
+										for (int k = 0; k < cols.length; k++) {
+											if (cols[k].equals(Character.toString(i))) flag = k;
+										}
+										for (int j = 1; j <= col; j++) {
+											if (j != 1 && j % 5 == 1) {
+												out.println("<td>&nbsp;</td>");
+											}
+											out.println("<td align='center'>");
+											str = String.valueOf(i) + j;
+											
+											if (flag != -1 && Integer.parseInt(rows[flag]) == j) {
+												out.println("<input type='checkbox' name='seat' value='" + str + "' disabled='disabled'>");
+												flag = -1;
+											} else {
+												out.println("<input type='checkbox' name='seat' value='" + str + "'>");														
+											}
+											out.println("</td>");
+										}
+										out.println("</tr>");
+									}
+								%>
+								<tr>
+									<td colspan="12">
+										<input type="button" value="결제하기" onclick="reservation();">
+									</td>
+								</tr>
+							</table>
+							</center>
+						</form>
+	            	</div>
+	        	</div>
+	      	</div>
+	    </div>
+	</div>
+		
+	<!-- footer -->
+	<jsp:include page="../memberMain/member_Footer.jsp" />
+	
+	<!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="../js/scripts.js"></script>
 </body>
 </html>

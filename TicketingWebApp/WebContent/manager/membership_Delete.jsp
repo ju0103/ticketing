@@ -8,11 +8,8 @@
 
 </head>
 <body>
-	<jsp:include page="../managerMain/manager_Header.jsp" />
-
-
 	<form  method="post" action="membership_DeleteOk.jsp">
-		<table>
+		<table class="table">
 			<tr>
 				<td>삭제 아이디</td>
 				<td><input type="text" name="member_id"></td>	
@@ -21,9 +18,6 @@
 		<input type="submit" value="삭제" >
 	</form>
 	
-	
-	<!-- footer -->
-	<jsp:include page="../managerMain/manager_Footer.jsp" />
 	<!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->

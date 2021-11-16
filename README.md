@@ -30,6 +30,15 @@ performance 테이블 insert (perfor_RegisterForm.jsp) 공연포스터 업로드
 
 Ex) D:\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\TicketingWebApp\upload
 
+### 실행 파일 이름
+- 관리자 페이지: managerMain 폴더의 manager_Main.jsp
+- 회원 페이지: memberMain 폴더의 member_Main.jsp
+
+## ✔ 기능 설명
+
+### 관리자 페이지
+
+### 회원 페이지
 
 ## 📂 폴더 구조
 ```
@@ -50,9 +59,15 @@ src
  ┃ ┣ member
  ┃ ┃ ┣ MemberBean.java
  ┃ ┃ ┗ MemberDBBean.java
+ ┃ ┣ notice
+ ┃ ┃ ┣ noticeBean.java
+ ┃ ┃ ┗ noticeDBBean.java
  ┃ ┣ performance
  ┃ ┃ ┣ PerformanceBean.java
  ┃ ┃ ┗ PerformanceDBBean.java
+ ┃ ┣ qna
+ ┃ ┃ ┣ QnABean.java
+ ┃ ┃ ┗ QnADBBean.java
  ┃ ┣ reservation
  ┃ ┃ ┣ ReservationBean.java
  ┃ ┃ ┗ ReservationDBBean.java
@@ -64,6 +79,7 @@ WebContent
  ┃ ┗ styles.css
  ┣ js
  ┃ ┣ check.js
+ ┃ ┣ qna.js
  ┃ ┗ scripts.js
  ┣ images
  ┃ ┗ photo.png
@@ -107,12 +123,24 @@ WebContent
  ┃ ┣ member_Logout.jsp
  ┃ ┣ member_RegisterForm.jsp
  ┃ ┣ member_RegisterOk.jsp
+ ┃ ┣ member_ReservationMGRDelete.jsp
+ ┃ ┣ member_ReservationMGRForm.jsp
  ┃ ┣ member_UpdateForm.jsp
  ┃ ┗ member_UpdateOk.jsp
  ┣ memberMain
  ┃ ┣ member_Fotter.jsp
  ┃ ┣ member_Header.jsp
  ┃ ┗ member_Main.jsp
+ ┣ notice
+ ┃ ┣ member_notice_View.jsp
+ ┃ ┣ notice_DeleteOk.jsp
+ ┃ ┣ notice_List.jsp
+ ┃ ┣ notice_MemberList.jsp
+ ┃ ┣ notice_Update.jsp
+ ┃ ┣ notice_UpdateOk.jsp
+ ┃ ┣ notice_View.jsp 
+ ┃ ┣ notice_Write.jsp 
+ ┃ ┗ notice_WriteOk.jsp
  ┣ performance
  ┃ ┣ manager_performance_List.jsp
  ┃ ┣ member_performance_List.jsp
@@ -124,6 +152,15 @@ WebContent
  ┃ ┣ performance_UpdateForm.jsp
  ┃ ┣ performance_UpdateOk.jsp 
  ┃ ┗ performance_View.jsp
+ ┣ qna
+ ┃ ┣ qna_answer.jsp
+ ┃ ┣ qna_delete.jsp
+ ┃ ┣ qna_edit_ok.jsp
+ ┃ ┣ qna_edit.jsp
+ ┃ ┣ qna_list.jsp
+ ┃ ┣ qna_main.jsp
+ ┃ ┣ qna_write_ok.jsp 
+ ┃ ┗ qna_write.jsp
  ┣ reservation
  ┃ ┣ reservation_check.jsp
  ┃ ┣ reservation_form.jsp

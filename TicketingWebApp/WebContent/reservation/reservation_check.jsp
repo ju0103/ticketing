@@ -3,7 +3,7 @@
     pageEncoding="EUC-KR"%>
 <%
 	String p_code = request.getParameter("p_code");
-	String member_id = (String) session.getAttribute("member_id");
+	String member_id = (String)session.getAttribute("member_id");
 	
 	ReservationDBBean db = ReservationDBBean.getInstance();
 	int re = db.checkReservation(p_code, member_id);

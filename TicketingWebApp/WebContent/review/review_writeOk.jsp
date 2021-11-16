@@ -50,7 +50,7 @@
 	
 	ReviewDBBean db = ReviewDBBean.getInstance();
 	if(db.insertBoard(board, p_code) == 1){
-		response.sendRedirect("review_list.jsp");
+		response.sendRedirect("review_list.jsp?p_code=" + p_code);
 	} else {
 		%>
 		<script type="text/javascript">

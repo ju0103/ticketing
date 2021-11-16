@@ -62,11 +62,10 @@
                 msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
                 // 결제 실패 시 공연 페이지로 이동
-                location.href="../performance/member_performance_List.jsp?p_code=<%= p_code %>";
+                location.href="../performance/performance_Detail.jsp?p_code=<%= p_code %>";
                 alert(msg);
             }
         });
-        
     });
     </script> 
 </body>

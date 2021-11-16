@@ -79,10 +79,8 @@ private static QnADBBean instance = new QnADBBean();
 			pstmt.setInt(8,level);
 			pstmt.executeUpdate();
 
-			System.out.println("글 올리기를 성공했습니다.");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("글 올리기를 실패했습니다.");
 		}finally {
 			try {
 				if(pstmt != null) pstmt.close();
@@ -109,7 +107,7 @@ private static QnADBBean instance = new QnADBBean();
 		try {
 			con = getConnection();
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			pageSet = stmt.executeQuery("select count(*) from QnA");
+			pageSet = stmt.executeQuery("select count(*) from QnA where performance_p_code="+p_code);
 			
 			if(pageSet.next()) { // dbcount에 총 개수를 넣음
 				dbCount = pageSet.getInt(1);
@@ -132,7 +130,6 @@ private static QnADBBean instance = new QnADBBean();
 			pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE); 
 			pstmt.setInt(1, p_code);
 			rs = pstmt.executeQuery();
-			System.out.println("listQnA/p_code = "+p_code);
 			
 			if(rs.next()) {
 				rs.absolute(absoultePage); 
@@ -212,15 +209,13 @@ private static QnADBBean instance = new QnADBBean();
 		}
 		return QnA;
 	}
-	public int deleteQnA(int q_no,String q_writer,String mem_id) throws Exception {
+	public int deleteQnA(int q_no,String q_writer,String login_id) throws Exception {
 		//id와 pwd를 받아 삭제하는 메소드
 		Connection con = null;
 		PreparedStatement pstmt =null;
 		ResultSet rs = null;
 		String sql = "";
 		int re= -1; // 값을 리턴할 re
-		System.out.println("DB/deleteQnA / 작성자 : "+q_writer);
-		System.out.println("DB/deleteQnA / 유저 : "+mem_id);
 		
 		try {
 			con = getConnection();
@@ -228,14 +223,12 @@ private static QnADBBean instance = new QnADBBean();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, q_no);
 			rs = pstmt.executeQuery();
-			System.out.println("DB : deleteQnA/q_no=" + q_no);
+			System.out.println("DB::deleteQnA / q_no=" + q_no);
 			if(rs.next()) {
 				q_writer = rs.getString(1); 
 				
-				if (!mem_id.equals(q_writer)) {//같지않다
+				if (!login_id.equals(q_writer)) {//같지않다
 					re =0;
-					System.out.println("DB/mem_id = "+mem_id);
-					System.out.println("DB/q_writer = "+q_writer);
 					
 				}else {
 					//같을 때 삭제쿼리 진행
@@ -261,7 +254,7 @@ private static QnADBBean instance = new QnADBBean();
 		}
 		return re;
 	}
-	public int editQnA(QnABean QnA) {
+	public int editQnA(QnABean QnA,String login_id) {
 		// QnA를 받아서 수정하는 메소드
 		
 		Connection con = null;
@@ -280,10 +273,10 @@ private static QnADBBean instance = new QnADBBean();
 			
 			if(rs.next()) {
 				writer = rs.getString(1);
-				if(!writer.equals(QnA.getQ_writer())) {
+				if(login_id==null){ //비회원
+					re = 2;
+				}else if(!writer.equals(login_id)) {
 					re = 0; 
-					System.out.println("writer = "+writer);
-					System.out.println("작성자 = "+QnA.getQ_writer());
 				}else {
 					sql ="update QnA set q_content=? where q_no=?";
 					pstmt = con.prepareStatement(sql);

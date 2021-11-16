@@ -62,35 +62,69 @@ private static FaqDBBean instance = new FaqDBBean();
 		return re;
 	}
 	
-	// listFaq(): faq 리스트를 리턴하는 메소드
-	public ArrayList<FaqBean> listFaq(String faq_type) throws Exception {
+	// listFaq(): return faq lists to manager
+	public ArrayList<FaqBean> listFaq(String pageNumber) throws Exception {
 		Connection conn = null;
-		PreparedStatement pstmt = null;
+		Statement stmt = null;
 		ResultSet rs = null;
+		ResultSet pageSet = null; // 페이지
 		String sql = "";
 		ArrayList<FaqBean> faqList = new ArrayList<FaqBean>();
 		
+		int absolutPage=1; // 첫번째 페이지
+		int dbcount=0;
+		
 		try {
 			conn = getConnection();
-			sql = "select * from faq WHERE faq_type = ? ORDER BY faq_code";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setNString(1, faq_type);
-			rs = pstmt.executeQuery();
 			
-			while (rs.next()) {
-				FaqBean faq = new FaqBean();
-				faq.setFaq_code(rs.getInt("faq_code"));
-				faq.setFaq_type(rs.getString("faq_type"));
-				faq.setFaq_quest(rs.getString("faq_quest"));
-				faq.setFaq_answer(rs.getString("faq_answer"));
-				faqList.add(faq);
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			pageSet = stmt.executeQuery("select count(*) from FAQ");
+			
+			if (pageSet.next()) {
+				dbcount = pageSet.getInt(1);
+				pageSet.close();
+			}
+			
+			if (dbcount % FaqBean.pageSize == 0) {
+				FaqBean.pageCount = dbcount / FaqBean.pageSize;
+			} else {
+				FaqBean.pageCount = dbcount / FaqBean.pageSize + 1;
+			}
+			
+			if (pageNumber != null) {
+				FaqBean.pageNum = Integer.parseInt(pageNumber);
+				absolutPage = (FaqBean.pageNum-1) * FaqBean.pageSize + 1;
+			}
+			
+			sql = "select * from faq ORDER BY faq_code DESC";
+			rs = stmt.executeQuery(sql);
+			
+			if (rs.next()) {
+				rs.absolute(absolutPage);
+				int count = 0;
+				
+				while (count < FaqBean.pageSize) {
+					FaqBean faq = new FaqBean();
+					faq.setFaq_code(rs.getInt(1));
+					faq.setFaq_type(rs.getString(2));
+					faq.setFaq_quest(rs.getString(3));
+					faq.setFaq_answer(rs.getString(4));
+					faqList.add(faq);
+					
+					if (rs.isLast()) {
+						break;
+					}else {
+						rs.next();
+					}
+					count++;
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
 				if (rs != null) rs.close();
-				if (pstmt != null) pstmt.close();
+				if (stmt != null) stmt.close();
 				if (conn != null) conn.close();
 			} catch (Exception e2) {
 				e2.printStackTrace();

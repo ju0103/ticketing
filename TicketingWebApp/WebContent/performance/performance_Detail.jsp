@@ -48,58 +48,53 @@
 	<link href="../css/styles.css" rel="stylesheet" />
 </head>
 <body>
-
-	<div class="container mt-5">
+	<jsp:include page="../memberMain/member_Header.jsp" />
+	
+	<div class="container">
 		<div class="row">
-			<div class="col-lg-8">
-				<article>
-					<header class="mb-4">
-						<h1 class="fw-bolder mb-1"><%= p_title %></h1>
-					</header>
-					<figure class="mb-4">
-						<img class="img-fluid rounded" src="../upload/<%=p_fname %>">
-					</figure>
-					<section class="mb-5">
-						<table>
-							<tr>
-								<td>장소</td>
-								<td><%= p_area %><%= p_detailarea %></td>
-							</tr>
-							<tr>
-								<td>공연일</td>
-								<td><%= p_date %></td>
-							</tr>
-							<tr>
-								<td>공연시간</td>
-								<td><%= p_time %>분</td>
-							</tr>
-							<tr>
-								<td>관람연령</td>
-								<td>만 <%= p_rating %>세 이상</td>
-							</tr>
-							<tr>
-								<td>가격</td>
-								<td>전석 <b><%= p_price %></b>원</td>
-							</tr>
-							<tr>
-								<td>
-									<button class="btn btn-primary btn-lg" onclick="location.href='../review/review_list.jsp?p_code=<%= p_code%>'">후기</button>
-								</td>
-								<td>
-									<button class="btn btn-primary btn-lg" onclick="location.href='../qna/qna_main.jsp?p_code=<%= p_code%>'">QnA</button>
-								</td>
-								<td>
-									<button class="btn btn-primary btn-lg" onclick="location.href='../reservation/reservation_check.jsp?p_code=<%= p_code%>'">예매하기</button>
-								</td>
-							</tr>
-						</table>
-					</section>
-				</article>
-			</div>
-		</div>
+			<div class="col-sm-12 col-md-12 col-lg-10 mx-auto">
+				<header class="mb-4">
+					<h1 class="fw-bolder mb-1" style="margin: 30px"><%= p_title %></h1>
+				</header>
+				<section class="mb-5">
+					<table class="table">
+						<tr>
+							<td class="align-middle" align="center" rowspan="6" width="25%">
+								<img class="img-fluid rounded" src="../upload/<%=p_fname %>">
+							</td>
+						</tr>
+						<tr>
+							<td class="align-middle" height="20" style="padding: 15px;" width="10%">장소</td>
+							<td class="align-middle" height="20" style="padding: 15px;" width="55%"><%= p_area %></td>
+						</tr>
+						<tr>
+							<td class="align-middle" height="20" style="padding: 15px;" width="10%">공연일</td>
+							<td class="align-middle" height="20" style="padding: 15px;" width="55%"><%= p_date %></td>
+						</tr>
+						<tr>
+							<td class="align-middle" height="20" style="padding: 15px;" width="10%">공연시간</td>
+							<td class="align-middle" height="20" style="padding: 15px;" width="55%"><%= p_time %>분</td>
+						</tr>
+						<tr>
+							<td class="align-middle" height="20" style="padding: 15px;" width="10%">관람연령</td>
+							<td class="align-middle" height="20" style="padding: 15px;" width="55%">만 <%= p_rating %>세 이상</td>
+						</tr>
+						<tr>
+							<td class="align-middle" height="20" style="padding: 15px;" width="10%">가격</td>
+							<td class="align-middle" height="20" style="padding: 15px;" width="55%">전석 <b><%= p_price %></b>원</td>
+						</tr>
+						<tr>
+							<td class="align-middle" height="500" colspan="3"><pre><%= p_description %></pre></pre></td>
+						</tr>
+					</table>
+					<jsp:include page="../performance/performance_DetailEtc.jsp"></jsp:include>
+				</section>
+	      	</div>
+	    </div>
 	</div>
 	
-
+	<jsp:include page="../memberMain/member_Footer.jsp"></jsp:include>
+	
 	<!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->

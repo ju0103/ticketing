@@ -38,7 +38,7 @@
 					</div>
 					<div class="mb-3">
 						<label class="form-label" for="faq_answer">문의 내용</label>
-						<textarea class="form-control" id="i_content" cols="100" rows="10" name="i_content"></textarea>
+						<textarea class="form-control" id="i_quest" cols="100" rows="10" name="i_quest"></textarea>
 					</div>
 					<div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
 						<button class="btn btn-outline-primary btn-sm px-4" type="submit">등록</button><br>

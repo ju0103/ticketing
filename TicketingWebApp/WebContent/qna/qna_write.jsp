@@ -7,16 +7,14 @@
 	int q_no=0;
 	int q_ref=1,q_step=0,q_level=0;
 	String q_content="";
-	String memberId = (String)session.getAttribute("member_id");
-	if(memberId == null){
-%>
-		<script language="JavaScript">
-			alert("로그인을 해야 작성이 가능합니다.");
-			history.go(-1);
-		</script>
-<%
-		response.sendRedirect("qna_main.jsp?p_code="+p_code);
+	
+	String login_id="";
+	if(session.getAttribute("member_id")!=null){
+		login_id = (String)session.getAttribute("member_id");
+	}else{
+		login_id = (String)session.getAttribute("manager_id");
 	}
+	
 	if(request.getParameter("q_no")!=null){
 		q_no = Integer.parseInt(request.getParameter("q_no"));
 	}
@@ -41,6 +39,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+	<script type="text/javascript" src="../js/qna.js" charset="utf-8"></script>
 </head>
 <body>
 	<center>
@@ -50,35 +49,28 @@
 			<input type="hidden" name="q_ref" value="<%=q_ref%>">
 			<input type="hidden" name="q_step" value="<%=q_step%>">
 			<input type="hidden" name="q_level" value="<%=q_level%>">
+			<input type="hidden" name="q_writer" value="<%=login_id%>">
 			<table>
 				<tr>
-					<td>작성자</td>
-					<td><input type="text" name="q_writer" value="<%=memberId%>"></td>
-				</tr>
-				<tr>
-					<td>문의내용</td>
+					<td>문의내용&nbsp;&nbsp;</td>
 					<td>
 					<% 
 						if(q_no == 0){
-							%>
-							<input type="text" name="q_content" size="80">
-							<%	
-						}else{
-							%>
-							<input type="text" name="q_content" size="80" value="[답변]:<%= q_content%>">
-						<%
-						}
 					%>
+<textarea cols="100" rows="2" name="q_content" 
+placeholder=" * 게시된 글의 저작권은 글을 작성한 회원에게 있습니다. 
+ * 게시물로 인해 발생하는 문제는 게시자 본인에게 책임이 있습니다."></textarea>
+					<%	
+						}else{
+					%>
+							<input type="text" name="q_content" size="80" value="[답변]:<%= q_content%>">
+					<% 
+					} 
+					%>
+							&nbsp;&nbsp;
+							
 					</td>
-				</tr>
-				<tr align="center">
-					<td colspan="2">
-						<input type="submit" value="등록" >
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="reset" value="취소">
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="button" value="목록" onclick="location.href='qna_list.jsp?pageNum=<%=pageNum%>'">
-					</td>
+					<td><input type="button" value="등록" onclick="check_ok()"></td>
 				</tr>
 			</table>
 		</form>

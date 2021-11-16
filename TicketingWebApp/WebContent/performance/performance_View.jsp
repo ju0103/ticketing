@@ -36,7 +36,7 @@
 					공연제목
 				</td>
 				<td>
-					<%=p_title  %>
+					<a href="performance_Detail.jsp?p_code=<%= p_code %>" ><%=p_title  %></a>
 				</td>
 			</tr>
 			<tr>

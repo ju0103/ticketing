@@ -1,7 +1,7 @@
 <%@page import="ticketing.review.ReviewBean"%>
 <%@page import="ticketing.review.ReviewDBBean"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=euc-kr"
+    pageEncoding="euc-kr"%>
 <%
 	int p_code = Integer.parseInt(request.getParameter("p_code"));
 	int r_id = Integer.parseInt(request.getParameter("r_id"));
@@ -16,12 +16,12 @@
 </head>
 <body>
 	<center>
-		<h1>ê¸€ ìˆ˜ ì • í•˜ ê¸°</h1>
+		<h1>±Û ¼ö Á¤ ÇÏ ±â</h1>
 		<form name="form" method="post" action="review_editOk.jsp?p_code=<%= p_code %>&r_id=<%= r_id %>">
 			<table>
 				<tr height="30">
 					<td width="80">
-						ìž‘ì„±ìž
+						ÀÛ¼ºÀÚ
 					</td>
 					<td width="140">
 						<input name="r_name" type="text" value="<%= board.getReview_name()%>" disabled="disabled">
@@ -29,7 +29,7 @@
 				</tr>
 				<tr height="30">
 					<td width="80">
-						ì œëª©
+						Á¦¸ñ
 					</td>
 					<td colspan="2">
 						<input name="r_title" type="text" size="50" value="<%= board.getReview_title()%>">
@@ -37,7 +37,7 @@
 				</tr>
 				<!-- 
 				<tr height="30">
-					<td width="80">ì²¨ë¶€íŒŒì¼</td>
+					<td width="80">Ã·ºÎÆÄÀÏ</td>
 					<td colspan="3">
 						<input type="file" name="b_fname" size="40">
 					</td>
@@ -50,7 +50,7 @@
 				</tr>
 				<tr>
 					<td width="80">
-						ë¹„ë°€ë²ˆí˜¸
+						ºñ¹Ð¹øÈ£
 					</td>
 					<td colspan="3">
 						<input name="r_pwd" type="password" size="12" maxlength="12">
@@ -58,8 +58,8 @@
 				</tr>
 				<tr height="50" align="center">
 					<td colspan="4">
-						<input type="submit" value="ìˆ˜ì •">&nbsp;
-						<input type="button" value="ëª©ë¡" onclick="history.go(-1)">
+						<input type="submit" value="¼öÁ¤">&nbsp;
+						<input type="button" value="¸ñ·Ï" onclick="history.go(-1)">
 					</td>
 				</tr>
 			</table>
