@@ -1,12 +1,15 @@
 # 티켓팅
 
 ## 💻 실행 환경
+
 - windows 10
 - eclipse 2020-06
 - Apache Tomcat 7.0
 
 ## 💻 실행하기
+
 ### Oracle에 사용자 추가
+
 1. System 계정으로 접속하여 'TICKETING'이라는 이름의 사용자를 추가한다.
 
 2. 'TICKETING' 사용자로 데이터베이스에 접속한다.
@@ -16,21 +19,23 @@
 4. F5키를 클릭하여 스크립트를 실행한다.
 
 ### context 및 DBCP 등록
-1. Server.xml 파일 하단에 아래 소스를 추가
-    ``` xml
-    <Context docBase="TicketingWebApp" path="/TicketingWebApp" reloadable="true" source="org.eclipse.jst.jee.server:TicketingWebApp"></Context>
-    ```
-2. `<Context></Context>` 내에 아래 소스를 추가
-    ``` xml
-    <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="100" maxIdle="30" maxWait="10000" name="jdbc/oracle" password="1234" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:xe" username="TICKETING"/>
-    ```
-    
-### 공연 이미지 업로드 관련
-performance 테이블 insert (perfor_RegisterForm.jsp) 공연포스터 업로드 시 본인 workspace 하위 경로에 upload 파일 생성
 
-Ex) D:\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\TicketingWebApp\upload
+1. Server.xml 파일 하단에 아래 소스를 추가
+   ```xml
+   <Context docBase="TicketingWebApp" path="/TicketingWebApp" reloadable="true" source="org.eclipse.jst.jee.server:TicketingWebApp"></Context>
+   ```
+2. `<Context></Context>` 내에 아래 소스를 추가
+   ```xml
+   <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="100" maxIdle="30" maxWait="10000" name="jdbc/oracle" password="1234" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:xe" username="TICKETING"/>
+   ```
+
+### 공연 이미지 업로드 관련
+
+- performance 테이블 insert (perfor_RegisterForm.jsp) 공연포스터 업로드 시 본인 workspace 하위 경로에 upload 파일 생성
+  - Ex) D:\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\TicketingWebApp\upload
 
 ### 실행 파일 이름
+
 - 관리자 페이지: managerMain 폴더의 manager_Main.jsp
 - 회원 페이지: memberMain 폴더의 member_Main.jsp
 
@@ -38,9 +43,25 @@ Ex) D:\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\
 
 ### 관리자 페이지
 
+1. 공연 관리: 공연 목록 조회 및 공연 등록, 수정, 삭제
+2. 회원 관리: 회원 정보 조회 및 삭제
+3. FAQ 관리: 자주 묻는 질문 조회 및 등록, 수정, 삭제
+4. 1:1 문의 관리: 1:1 문의 조회, 답변
+5. 공지사항 관리: 공지사항 조회 및 등록, 수정, 삭제
+
 ### 회원 페이지
 
+1. 메인 페이지: 공연 목록 조회 및 공연 상세 정보 조회
+
+- 공연 QnA: 공연 QnA 조회 및 등록, 수정, 삭제
+- 공연 후기: 공연 후기 조회 및 등록, 수정, 삭제
+- 예매하기: 좌석 선택 및 결제, 예매
+
+2. 마이페이지: 나의 예매 내역 조회, 나의 문의 내역 조회, 회원 정보 수정 및 탈퇴
+3. 고객 센터: 공지사항 및 FAQ 조회, 1:1 문의하기
+
 ## 📂 폴더 구조
+
 ```
 src
  ┣ myUtil
@@ -138,8 +159,8 @@ WebContent
  ┃ ┣ notice_MemberList.jsp
  ┃ ┣ notice_Update.jsp
  ┃ ┣ notice_UpdateOk.jsp
- ┃ ┣ notice_View.jsp 
- ┃ ┣ notice_Write.jsp 
+ ┃ ┣ notice_View.jsp
+ ┃ ┣ notice_Write.jsp
  ┃ ┗ notice_WriteOk.jsp
  ┣ performance
  ┃ ┣ manager_performance_List.jsp
@@ -150,7 +171,7 @@ WebContent
  ┃ ┣ performance_RegisterForm.jsp
  ┃ ┣ performance_RegisterOk.jsp
  ┃ ┣ performance_UpdateForm.jsp
- ┃ ┣ performance_UpdateOk.jsp 
+ ┃ ┣ performance_UpdateOk.jsp
  ┃ ┗ performance_View.jsp
  ┣ qna
  ┃ ┣ qna_answer.jsp
@@ -159,12 +180,12 @@ WebContent
  ┃ ┣ qna_edit.jsp
  ┃ ┣ qna_list.jsp
  ┃ ┣ qna_main.jsp
- ┃ ┣ qna_write_ok.jsp 
+ ┃ ┣ qna_write_ok.jsp
  ┃ ┗ qna_write.jsp
  ┣ reservation
  ┃ ┣ reservation_check.jsp
  ┃ ┣ reservation_form.jsp
- ┃ ┣ reservation_pay.jsp 
+ ┃ ┣ reservation_pay.jsp
  ┃ ┗ reservation_success.jsp
  ┣ review
  ┃ ┣ review_delete.jsp
